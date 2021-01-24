@@ -19,7 +19,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
       body: Container(
           width: double.maxFinite,
           child: new ListView.builder(
-              itemCount: 14, //will be customer list size
+              itemCount: 14,
               itemBuilder: (BuildContext context, int index) =>
                   buildCard(context, index))),
     );
