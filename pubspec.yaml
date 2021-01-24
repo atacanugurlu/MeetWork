@@ -1,0 +1,33 @@
+name: meetwork
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  google_fonts: ^1.1.1
+  flutter_spinkit: ^4.1.2
+  font_awesome_flutter: ^8.8.1
+  cupertino_icons: ^1.0.0
+  flutter_launcher_icons: ^0.8.1
+  nfc_in_flutter: ^2.0.5
+  nearby_connections: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+ uses-material-design: true
+ assets:
+  - assets/images/meetwork_logo.png
+
+flutter_icons:
+  image_path: 'assets/launcher/meetwork_launcher.png'
+  android: true
+  ios: true
