@@ -10,6 +10,7 @@ class SocialMediaScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: sideMenuColor2,
       drawer: BuildSideMenu(routeName: SocialMediaScreen.id),
       appBar: AppBar(
         title: Text("Social Media"),
@@ -64,11 +65,12 @@ class ChoiceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
-                    child: Icon(choice.icon, size: 70.0, color: Colors.white)),
+                    child:
+                        Icon(choice.icon, size: 70.0, color: sideMenuColor2)),
                 Text(
                   choice.title,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: sideMenuColor2,
                       fontSize: 20,
                       fontWeight: FontWeight.w500),
                 ),

@@ -16,7 +16,7 @@ class _OpeningScreenState extends State<OpeningScreen> {
   Timer _timer;
   bool animated = false;
   void initState() {
-    _timer = Timer.periodic(Duration(milliseconds: 1000), (Timer t) {
+    _timer = Timer.periodic(Duration(milliseconds: 750), (Timer t) {
       setState(() {
         animated = !animated;
       });
@@ -43,12 +43,12 @@ class _OpeningScreenState extends State<OpeningScreen> {
                         child: Text('Meet'),
                         style: !animated
                             ? TextStyle(
-                                color: Colors.white,
+                                color: basePurple,
                                 fontSize: 60,
                                 fontWeight: FontWeight.normal,
                                 letterSpacing: -3)
                             : TextStyle(
-                                color: Colors.white,
+                                color: basePurple,
                                 fontSize: 60,
                                 fontWeight: FontWeight.w900,
                                 letterSpacing: -3),
@@ -106,8 +106,8 @@ class _OpeningScreenState extends State<OpeningScreen> {
               child: RichText(
                   text: TextSpan(
                       style: TextStyle(
-                          color: Colors.white54,
-                          fontSize: 35,
+                          color: basePurple,
+                          fontSize: 40,
                           fontStyle: FontStyle.italic),
                       text: "Social Media")),
             )),
@@ -120,7 +120,7 @@ class _OpeningScreenState extends State<OpeningScreen> {
                   text: TextSpan(
                       style: TextStyle(
                           color: sideMenuColor2,
-                          fontSize: 35,
+                          fontSize: 40,
                           fontStyle: FontStyle.italic),
                       text: "Business")),
             )),
