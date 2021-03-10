@@ -16,7 +16,7 @@ class _OpeningScreenState extends State<OpeningScreen> {
   Timer _timer;
   bool animated = false;
   void initState() {
-    _timer = Timer.periodic(Duration(milliseconds: 500), (Timer t) {
+    _timer = Timer.periodic(Duration(milliseconds: 1000), (Timer t) {
       setState(() {
         animated = !animated;
       });
@@ -109,7 +109,7 @@ class _OpeningScreenState extends State<OpeningScreen> {
                           color: Colors.white54,
                           fontSize: 35,
                           fontStyle: FontStyle.italic),
-                      text: "Sosyal Medya")),
+                      text: "Social Media")),
             )),
         Container(
             padding: EdgeInsets.only(bottom: 50),
@@ -122,7 +122,7 @@ class _OpeningScreenState extends State<OpeningScreen> {
                           color: sideMenuColor2,
                           fontSize: 35,
                           fontStyle: FontStyle.italic),
-                      text: "Kartvizitim")),
+                      text: "Business")),
             )),
       ]),
     );

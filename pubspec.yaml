@@ -15,7 +15,6 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   cupertino_icons: ^1.0.0
   flutter_launcher_icons: ^0.8.1
-  nfc_in_flutter: ^2.0.5
   nearby_connections: ^2.0.2
 
 dev_dependencies:

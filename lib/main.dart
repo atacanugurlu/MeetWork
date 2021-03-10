@@ -3,6 +3,7 @@ import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/social_media_screen.dart';
 import 'package:meetwork/screens/opening_screen.dart';
 import 'package:meetwork/screens/business_screen.dart';
+import 'package:meetwork/screens/qr_code_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'MeetWork',
         theme: ThemeData(
-          primarySwatch: Colors.indigo,
+          primarySwatch: Colors.blueGrey,
           accentColor: baseGrey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
           OpeningScreen.id: (context) => OpeningScreen(),
           SocialMediaScreen.id: (context) => SocialMediaScreen(),
           BusinessScreen.id: (context) => BusinessScreen(),
+          QRCodeScreen.id: (context) => QRCodeScreen(),
         });
   }
 }

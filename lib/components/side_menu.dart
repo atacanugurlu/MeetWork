@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meetwork/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:meetwork/screens/qr_code_screen.dart';
 import 'package:meetwork/screens/social_media_screen.dart';
 import 'package:meetwork/screens/opening_screen.dart';
 import 'package:meetwork/screens/business_screen.dart';
+import 'package:meetwork/screens/qr_code_screen.dart';
 
 class BuildSideMenu extends StatefulWidget {
   final String routeName;
@@ -12,7 +14,7 @@ class BuildSideMenu extends StatefulWidget {
   _BuildSideMenuState createState() => _BuildSideMenuState();
 }
 
-enum Screen { home, social, business }
+enum Screen { home, social, business, qrcode }
 
 class _BuildSideMenuState extends State<BuildSideMenu> {
   Color activeColor = basePurple;
@@ -25,6 +27,8 @@ class _BuildSideMenuState extends State<BuildSideMenu> {
       selectedScreen = Screen.social;
     } else if (routeName == BusinessScreen.id) {
       selectedScreen = Screen.business;
+    } else if (routeName == QRCodeScreen.id) {
+      selectedScreen = Screen.qrcode;
     }
   }
 
@@ -79,7 +83,7 @@ class _BuildSideMenuState extends State<BuildSideMenu> {
                     });
                   }),
               SideMenuCard(
-                  menuLabel: "Sosyal Medya",
+                  menuLabel: "Social Media",
                   iconType: FontAwesomeIcons.user,
                   color: selectedScreen == Screen.social
                       ? activeColor
@@ -92,7 +96,7 @@ class _BuildSideMenuState extends State<BuildSideMenu> {
                     });
                   }),
               SideMenuCard(
-                  menuLabel: "Kartvizit",
+                  menuLabel: "Business",
                   iconType: FontAwesomeIcons.briefcase,
                   color: selectedScreen == Screen.business
                       ? activeColor
@@ -104,53 +108,19 @@ class _BuildSideMenuState extends State<BuildSideMenu> {
                       Navigator.pushNamed(context, BusinessScreen.id);
                     });
                   }),
-              /*SideMenuCard(
-                  menuLabel: "Nesne Tabanlı Programlama",
-                  iconType: FontAwesomeIcons.objectGroup,
-                  color:
-                      selectedScreen == Screen.oop ? activeColor : inactiveColor,
+              SideMenuCard(
+                  menuLabel: "Invite People",
+                  iconType: FontAwesomeIcons.download,
+                  color: selectedScreen == Screen.qrcode
+                      ? activeColor
+                      : inactiveColor,
                   navigation: () {
                     setState(() {
                       Navigator.popUntil(
-                          context, ModalRoute.withName(HomeScreen.id));
-                      Navigator.pushNamed(context, OOPScreen.id);
+                          context, ModalRoute.withName(OpeningScreen.id));
+                      Navigator.pushNamed(context, QRCodeScreen.id);
                     });
-                  }),*/
-              // SideMenuCard(
-              //     menuLabel: "Risk Yönetimi",
-              //     iconType: FontAwesomeIcons.chartLine,
-              //     color:
-              //         selectedScreen == Screen.risks ? activeColor : inactiveColor,
-              //     navigation: () {
-              //       setState(() {
-              //         Navigator.popUntil(
-              //             context, ModalRoute.withName(DashboardScreen.id));
-              //         Navigator.pushNamed(context, RisksScreen.id);
-              //       });
-              //     }),
-              // SideMenuCard(
-              //     menuLabel: "Ürün Kataloğu",
-              //     iconType: FontAwesomeIcons.readme,
-              //     color: selectedScreen == Screen.accountMove
-              //         ? activeColor
-              //         : inactiveColor,
-              //     navigation: () {
-              //       setState(() {
-              //         Navigator.popUntil(
-              //             context, ModalRoute.withName(DashboardScreen.id));
-              //         Navigator.pushNamed(context, AccountMoveScreen.id);
-              //       });
-              //     }),
-              // SideMenuCard(
-              //     menuLabel: "Çıkış",
-              //     iconType: Icons.power_settings_new,
-              //     color: inactiveColor,
-              //     navigation: () {
-              //       setState(() {
-              //         Navigator.pushNamedAndRemoveUntil(context, LoginScreen.id,
-              //             ModalRoute.withName(WelcomeScreen.id));
-              //       });
-              //     }),
+                  }),
             ],
           ),
         ),
