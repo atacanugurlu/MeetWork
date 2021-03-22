@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:meetwork/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:meetwork/screens/qr_code_screen.dart';
-import 'package:meetwork/screens/social_media_screen.dart';
-import 'package:meetwork/screens/opening_screen.dart';
-import 'package:meetwork/screens/business_screen.dart';
-import 'package:meetwork/screens/qr_code_screen.dart';
+import 'package:meetwork/screens/main_screens/qr_code_screen.dart';
+import 'package:meetwork/screens/main_screens/social_media_screen.dart';
+import 'package:meetwork/screens/main_screens/opening_screen.dart';
+import 'package:meetwork/screens/main_screens/business_screen.dart';
 
 class BuildSideMenu extends StatefulWidget {
   final String routeName;

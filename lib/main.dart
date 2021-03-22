@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:meetwork/constants.dart';
-import 'package:meetwork/screens/social_media_screen.dart';
-import 'package:meetwork/screens/opening_screen.dart';
-import 'package:meetwork/screens/business_screen.dart';
-import 'package:meetwork/screens/qr_code_screen.dart';
+import 'package:meetwork/screens/main_screens/social_media_screen.dart';
+import 'package:meetwork/screens/main_screens/opening_screen.dart';
+import 'package:meetwork/screens/main_screens/business_screen.dart';
+import 'package:meetwork/screens/main_screens/qr_code_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +28,9 @@ class MyApp extends StatelessWidget {
           SocialMediaScreen.id: (context) => SocialMediaScreen(),
           BusinessScreen.id: (context) => BusinessScreen(),
           QRCodeScreen.id: (context) => QRCodeScreen(),
+          BusinessCardScreen.id: (context) => BusinessCardScreen(),
+          CardCollectionScreen.id: (context) => CardCollectionScreen(),
+          MediaAccountsScreen.id: (context) => MediaAccountsScreen(),
         });
   }
 }
