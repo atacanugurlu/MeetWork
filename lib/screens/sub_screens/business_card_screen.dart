@@ -1,10 +1,10 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
+import 'package:meetwork/business_card_data.dart';
 
 class BusinessCardScreen extends StatefulWidget {
   static const id = 'business_card_screen';
@@ -91,15 +91,14 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           padding: EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, CardCollectionScreen.id,
-                  arguments: Information(
-                      name: nameController.text,
-                      title: titleController.text,
-                      company: companyController.text,
-                      phone: phoneController.text,
-                      email: emailController.text,
-                      website: websiteController.text,
-                      linkedin: linkedinController.text));
+              Information cardInfo = new Information(
+                  name: nameController.text,
+                  title: titleController.text,
+                  company: companyController.text,
+                  phone: phoneController.text,
+                  email: emailController.text,
+                  website: websiteController.text,
+                  linkedin: linkedinController.text);
             },
             child: Text('Save Card'),
           ),
@@ -107,25 +106,6 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
       ]),
     );
   }
-}
-
-class Information {
-  String name;
-  String title;
-  String company;
-  String phoneNumber;
-  String email;
-  String website;
-  String linkedInName;
-
-  Information(
-      {String name,
-      String title,
-      String company,
-      String phone,
-      String email,
-      String website,
-      String linkedin});
 }
 
 Widget personNameJob() {
@@ -143,6 +123,8 @@ Widget personNameJob() {
             controller: nameController,
             textAlign: TextAlign.left,
             decoration: InputDecoration(
+              isDense: true,
+              contentPadding: EdgeInsets.fromLTRB(15, 20, 1, 1),
               border: OutlineInputBorder(),
               labelText: 'Name Surname',
               labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
@@ -159,6 +141,8 @@ Widget personNameJob() {
               controller: titleController,
               textAlign: TextAlign.left,
               decoration: InputDecoration(
+                isDense: true,
+                contentPadding: EdgeInsets.fromLTRB(15, 20, 1, 1),
                 border: OutlineInputBorder(),
                 labelText: 'Title',
                 labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
@@ -179,6 +163,8 @@ Widget companyName() {
           controller: companyController,
           textAlign: TextAlign.left,
           decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(15, 20, 1, 1),
             border: OutlineInputBorder(),
             labelText: 'Company Name',
             labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
@@ -206,9 +192,11 @@ Widget phone() {
           controller: phoneController,
           textAlign: TextAlign.left,
           decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(5, 10, 10, 1),
             border: OutlineInputBorder(),
             labelText: 'Phone Number',
-            labelStyle: TextStyle(color: Colors.grey, fontSize: 8),
+            labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ),
       )
@@ -235,9 +223,11 @@ Widget email() {
           controller: emailController,
           textAlign: TextAlign.left,
           decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(5, 10, 10, 1),
             border: OutlineInputBorder(),
             labelText: 'Email',
-            labelStyle: TextStyle(color: Colors.grey, fontSize: 8),
+            labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ),
       )
@@ -264,9 +254,11 @@ Widget website() {
           controller: websiteController,
           textAlign: TextAlign.left,
           decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(5, 10, 10, 1),
             border: OutlineInputBorder(),
             labelText: 'Website',
-            labelStyle: TextStyle(color: Colors.grey, fontSize: 8),
+            labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ),
       )
@@ -292,9 +284,11 @@ Widget linkedin() {
           controller: linkedinController,
           textAlign: TextAlign.left,
           decoration: InputDecoration(
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(5, 10, 10, 1),
             border: OutlineInputBorder(),
             labelText: 'LinkedIn ID',
-            labelStyle: TextStyle(color: Colors.grey, fontSize: 8),
+            labelStyle: TextStyle(color: Colors.grey, fontSize: 12),
           ),
         ),
       )

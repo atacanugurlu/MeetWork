@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,10 +9,10 @@ import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
+import 'package:meetwork/business_card_data.dart';
 
 class CardCollectionScreen extends StatelessWidget {
   static const id = 'card_collection_screen';
-
   //CardCollectionScreen({Key key, @required this.cardInfo}) : super(key: key);
 
   @override
@@ -135,7 +134,7 @@ Widget companyName(Information cardInfo) {
 Widget phone(Information cardInfo) {
   return GestureDetector(
     onTap: () {
-      phoneCall(cardInfo.phoneNumber);
+      phoneCall(cardInfo.phone);
     },
     child: Row(
       children: [
@@ -151,7 +150,7 @@ Widget phone(Information cardInfo) {
           width: 90,
           child: RichText(
               text: TextSpan(
-                  text: cardInfo.phoneNumber,
+                  text: cardInfo.phone,
                   style: GoogleFonts.lato(fontSize: 8, color: Colors.black))),
         ),
       ],
@@ -232,7 +231,7 @@ Widget linkedin(Information cardInfo) {
           width: 90,
           child: RichText(
               text: TextSpan(
-                  text: cardInfo.linkedInName,
+                  text: cardInfo.linkedin,
                   style: GoogleFonts.lato(fontSize: 8, color: Colors.black))),
         ),
       ],
