@@ -18,6 +18,7 @@ dependencies:
   json_annotation: ^4.0.1
   maps_launcher: ^1.2.2+2
   path: ^1.8.0
+  shared_preferences: ^2.0.5
   sqflite: ^2.0.0+3
   url_launcher: ^5.7.2
 

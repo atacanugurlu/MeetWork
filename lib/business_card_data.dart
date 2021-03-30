@@ -1,4 +1,4 @@
-class Information {
+class BusinessCardInfo {
   String name;
   String title;
   String company;
@@ -7,7 +7,7 @@ class Information {
   String website;
   String linkedin;
 
-  Information(
+  BusinessCardInfo(
       {this.name,
       this.title,
       this.company,
@@ -16,7 +16,7 @@ class Information {
       this.website,
       this.linkedin});
 
-  Information.fromJson(Map<String, String> json)
+  BusinessCardInfo.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         title = json['title'],
         company = json['company'],
@@ -25,7 +25,7 @@ class Information {
         website = json['website'],
         linkedin = json['linkedin'];
 
-  Map<String, String> toJson() => {
+  Map<String, dynamic> toJson() => {
         'name': name,
         'title': title,
         'company': company,

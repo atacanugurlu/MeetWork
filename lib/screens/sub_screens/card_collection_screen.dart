@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,14 +11,40 @@ import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:meetwork/business_card_data.dart';
+import 'package:meetwork/components/shared_pref.dart';
 
-class CardCollectionScreen extends StatelessWidget {
+class CardCollectionScreen extends StatefulWidget {
   static const id = 'card_collection_screen';
-  //CardCollectionScreen({Key key, @required this.cardInfo}) : super(key: key);
+
+  @override
+  _CardCollectionScreenState createState() => _CardCollectionScreenState();
+}
+
+class _CardCollectionScreenState extends State<CardCollectionScreen> {
+  SharedPref sharedPref = SharedPref();
+
+  BusinessCardInfo savedCardDetails = BusinessCardInfo();
+
+  loadSharedPrefs() async {
+    try {
+      BusinessCardInfo card =
+          BusinessCardInfo.fromJson(await sharedPref.readPref("card"));
+
+      setState(() {
+        savedCardDetails = card;
+      });
+    } catch (Excepetion) {
+      print("Exception occurred");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final Information cardInfo = ModalRoute.of(context).settings.arguments;
+    Map cardInfo = ModalRoute.of(context).settings.arguments;
+    BusinessCardInfo cardDetails = BusinessCardInfo.fromJson(cardInfo);
+    sharedPref.savePref("card", cardDetails);
+    loadSharedPrefs();
+
     return Scaffold(
       drawer: BuildSideMenu(routeName: CardCollectionScreen.id),
       appBar: AppBar(
@@ -39,8 +66,8 @@ class CardCollectionScreen extends StatelessWidget {
                       flex: 10,
                       child: Stack(
                         children: [
-                          personNameJob(cardInfo),
-                          companyName(cardInfo),
+                          personNameJob(savedCardDetails),
+                          companyName(savedCardDetails),
                         ],
                       ),
                     ),
@@ -58,19 +85,19 @@ class CardCollectionScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           //fittedbox here
-                          phone(cardInfo),
+                          phone(savedCardDetails),
                           SizedBox(
                             height: 5,
                           ),
-                          email(cardInfo),
+                          email(savedCardDetails),
                           SizedBox(
                             height: 5,
                           ),
-                          website(cardInfo),
+                          website(savedCardDetails),
                           SizedBox(
                             height: 5,
                           ),
-                          linkedin(cardInfo)
+                          linkedin(savedCardDetails)
                         ],
                       ),
                     ],
@@ -85,7 +112,7 @@ class CardCollectionScreen extends StatelessWidget {
   }
 }
 
-Widget personNameJob(Information cardInfo) {
+Widget personNameJob(BusinessCardInfo cardInfo) {
   return Align(
     alignment: Alignment.topLeft,
     child: Container(
@@ -109,7 +136,7 @@ Widget personNameJob(Information cardInfo) {
   );
 }
 
-Widget companyName(Information cardInfo) {
+Widget companyName(BusinessCardInfo cardInfo) {
   return Align(
     alignment: Alignment.bottomLeft,
     child: GestureDetector(
@@ -131,7 +158,7 @@ Widget companyName(Information cardInfo) {
   );
 }
 
-Widget phone(Information cardInfo) {
+Widget phone(BusinessCardInfo cardInfo) {
   return GestureDetector(
     onTap: () {
       phoneCall(cardInfo.phone);
@@ -158,7 +185,7 @@ Widget phone(Information cardInfo) {
   );
 }
 
-Widget email(Information cardInfo) {
+Widget email(BusinessCardInfo cardInfo) {
   return GestureDetector(
     onTap: () {
       sendEmail(cardInfo.email);
@@ -185,7 +212,7 @@ Widget email(Information cardInfo) {
   );
 }
 
-Widget website(Information cardInfo) {
+Widget website(BusinessCardInfo cardInfo) {
   return GestureDetector(
     onTap: () {
       launchURL();
@@ -212,7 +239,7 @@ Widget website(Information cardInfo) {
   );
 }
 
-Widget linkedin(Information cardInfo) {
+Widget linkedin(BusinessCardInfo cardInfo) {
   return GestureDetector(
     onTap: () {
       launchURL();

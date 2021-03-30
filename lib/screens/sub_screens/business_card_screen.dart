@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           padding: EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              Information cardInfo = new Information(
+              BusinessCardInfo cardInfo = new BusinessCardInfo(
                   name: nameController.text,
                   title: titleController.text,
                   company: companyController.text,
@@ -99,6 +100,10 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
                   email: emailController.text,
                   website: websiteController.text,
                   linkedin: linkedinController.text);
+              Map cardData = cardInfo.toJson();
+
+              Navigator.pushNamed(context, CardCollectionScreen.id,
+                  arguments: cardData);
             },
             child: Text('Save Card'),
           ),

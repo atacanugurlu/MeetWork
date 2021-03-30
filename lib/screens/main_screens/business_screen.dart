@@ -49,11 +49,11 @@ class Choice {
 
 const List<Choice> choices = const [
   const Choice(
-      title: 'Business Card',
+      title: 'Create Card',
       icon: FontAwesomeIcons.idCard,
       page: BusinessCardScreen.id),
   const Choice(
-      title: 'Share Card', icon: Icons.share, page: BusinessCardScreen.id),
+      title: 'My Card', icon: Icons.share, page: BusinessCardScreen.id),
   const Choice(
       title: 'Card Collection',
       icon: Icons.collections_bookmark,
