@@ -6,11 +6,22 @@ import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
-class BusinessScreen extends StatelessWidget {
+class BusinessScreen extends StatefulWidget {
   static const id = 'business_screen';
 
   @override
+  _BusinessScreenState createState() => _BusinessScreenState();
+}
+
+class _BusinessScreenState extends State<BusinessScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: BuildSideMenu(routeName: BusinessScreen.id),
@@ -107,4 +118,14 @@ class ChoiceCard extends StatelessWidget {
           ),
         ));
   }
+}
+
+savePref(String key, String value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString(key, value);
+}
+
+removePref(String key) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.remove(key);
 }

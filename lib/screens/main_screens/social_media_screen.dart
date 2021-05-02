@@ -5,9 +5,14 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
 
-class SocialMediaScreen extends StatelessWidget {
+class SocialMediaScreen extends StatefulWidget {
   static const id = 'social_media_screen';
 
+  @override
+  _SocialMediaScreenState createState() => _SocialMediaScreenState();
+}
+
+class _SocialMediaScreenState extends State<SocialMediaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

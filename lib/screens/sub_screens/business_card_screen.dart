@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
 import 'package:meetwork/business_card_data.dart';
+import 'package:meetwork/screens/main_screens/business_screen.dart';
 
 class BusinessCardScreen extends StatefulWidget {
   static const id = 'business_card_screen';
@@ -92,18 +93,24 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           padding: EdgeInsets.all(8.0),
           child: ElevatedButton(
             onPressed: () {
-              BusinessCardInfo cardInfo = new BusinessCardInfo(
-                  name: nameController.text,
-                  title: titleController.text,
-                  company: companyController.text,
-                  phone: phoneController.text,
-                  email: emailController.text,
-                  website: websiteController.text,
-                  linkedin: linkedinController.text);
-              Map cardData = cardInfo.toJson();
+              removePref("name");
+              removePref("title");
+              removePref("company");
+              removePref("phone");
+              removePref("email");
+              removePref("website");
+              removePref("linkedin");
 
-              Navigator.pushNamed(context, CardCollectionScreen.id,
-                  arguments: cardData);
+              savePref("name", nameController.text);
+              savePref("title", titleController.text);
+              savePref("company", companyController.text);
+              savePref("phone", phoneController.text);
+              savePref("email", emailController.text);
+              savePref("website", websiteController.text);
+              savePref("linkedin", linkedinController.text);
+              print("Card Saved for " + nameController.text);
+
+              Navigator.pushNamed(context, CardCollectionScreen.id);
             },
             child: Text('Save Card'),
           ),
