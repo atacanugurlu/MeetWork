@@ -5,6 +5,7 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
+import 'package:meetwork/screens/sub_screens/my_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -63,8 +64,7 @@ const List<Choice> choices = const [
       title: 'Create Card',
       icon: FontAwesomeIcons.idCard,
       page: BusinessCardScreen.id),
-  const Choice(
-      title: 'My Card', icon: Icons.share, page: BusinessCardScreen.id),
+  const Choice(title: 'My Card', icon: Icons.share, page: MyCardScreen.id),
   const Choice(
       title: 'Card Collection',
       icon: Icons.collections_bookmark,

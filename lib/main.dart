@@ -7,6 +7,7 @@ import 'package:meetwork/screens/main_screens/qr_code_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
 import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/my_card_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
           BusinessCardScreen.id: (context) => BusinessCardScreen(),
           CardCollectionScreen.id: (context) => CardCollectionScreen(),
           MediaAccountsScreen.id: (context) => MediaAccountsScreen(),
+          MyCardScreen.id: (context) => MyCardScreen(),
         });
   }
 }
