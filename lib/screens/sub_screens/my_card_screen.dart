@@ -225,6 +225,11 @@ class _MyCardScreenState extends State<MyCardScreen> {
     }
   }
 
+  final _url = 'https://linkedin.com';
+  void launchURL() async => (await canLaunch(_url))
+      ? await launch(_url)
+      : throw 'Could not launch $_url';
+
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: readPref(),
@@ -303,10 +308,5 @@ class _MyCardScreenState extends State<MyCardScreen> {
                     child: Text("Loading...")));
           }
         });
-
-    const _url = 'https://linkedin.com';
-    void launchURL() async => (await canLaunch(_url))
-        ? await launch(_url)
-        : throw 'Could not launch $_url';
   }
 }

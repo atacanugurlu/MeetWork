@@ -29,7 +29,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
     return Scaffold(
       drawer: BuildSideMenu(routeName: BusinessCardScreen.id),
       appBar: AppBar(
-        title: Text("Your Business Card"),
+        title: Text("Create a Card"),
       ),
       body: Column(children: <Widget>[
         Container(

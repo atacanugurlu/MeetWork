@@ -225,6 +225,11 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
     }
   }
 
+  final _url = 'https://linkedin.com';
+  void launchURL() async => (await canLaunch(_url))
+      ? await launch(_url)
+      : throw 'Could not launch $_url';
+
   Widget build(BuildContext context) {
     return FutureBuilder(
         future: readPref(),
@@ -233,64 +238,81 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
             return Scaffold(
               drawer: BuildSideMenu(routeName: CardCollectionScreen.id),
               appBar: AppBar(
-                title: Text("Your Business Card"),
+                title: Text("Business Cards"),
               ),
               body: Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                height: 230,
-                width: double.maxFinite,
-                child: Card(
-                  elevation: 5,
-                  child: Padding(
-                    padding: EdgeInsets.all(24),
-                    child: Row(
-                      children: [
-                        Stack(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 10,
-                              child: Stack(
-                                children: [
-                                  personNameJobWidget(name, title),
-                                  companyNameWidget(company),
-                                ],
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount: 10, //From database
+                          itemBuilder: (context, index) {
+                            return Container(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              height: 230,
+                              width: double.maxFinite,
+                              child: Card(
+                                elevation: 5,
+                                child: Padding(
+                                  padding: EdgeInsets.all(24),
+                                  child: Row(
+                                    children: [
+                                      Stack(
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 10,
+                                            child: Stack(
+                                              children: [
+                                                personNameJobWidget(
+                                                    name, title),
+                                                companyNameWidget(company),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(
+                                        flex: 1,
+                                      ),
+                                      Expanded(
+                                        flex: 10,
+                                        child: Stack(
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                //fittedbox here
+                                                phoneWidget(phone),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                emailWidget(email),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                websiteWidget(website),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                linkedinWidget(linkedin)
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Spacer(
-                          flex: 1,
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Stack(
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  //fittedbox here
-                                  phoneWidget(phone),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  emailWidget(email),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  websiteWidget(website),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  linkedinWidget(linkedin)
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                            );
+                          }),
                     ),
-                  ),
+                  ],
                 ),
               ),
             );
@@ -303,10 +325,5 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                     child: Text("Loading...")));
           }
         });
-
-    const _url = 'https://linkedin.com';
-    void launchURL() async => (await canLaunch(_url))
-        ? await launch(_url)
-        : throw 'Could not launch $_url';
   }
 }
