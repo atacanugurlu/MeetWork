@@ -25,8 +25,19 @@ class CardCollectionScreen extends StatefulWidget {
 class _CardCollectionScreenState extends State<CardCollectionScreen> {
   DatabaseHelper _databaseHelper = DatabaseHelper();
 
-  void _addNote(BusinessCardInfo card) async {
+  void _addCard(BusinessCardInfo card) async {
     await _databaseHelper.insert(card);
+    setState(() {
+      getCards();
+    });
+  }
+
+  void _deleteCard(int deletedCardId, int deletedCardIndex) async {
+    await _databaseHelper.delete(deletedCardId);
+
+    setState(() {
+      getCards();
+    });
   }
 
   BusinessCardInfo atacan = BusinessCardInfo(1, "Atacan Ugurlu", "title",
@@ -50,8 +61,8 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
   @override
   void initState() {
     super.initState();
-    //_addNote(atacan);
-    //_addNote(atacan1);
+    //_addCard(atacan);
+    //_addCard(atacan1);
     getCards();
   }
 
@@ -236,7 +247,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
     return FutureBuilder(
         future: getCards(),
         builder: (context, snapshot) {
-          if (true) {
+          if (allCards.length > 0) {
             return Scaffold(
               drawer: BuildSideMenu(routeName: CardCollectionScreen.id),
               appBar: AppBar(
@@ -335,7 +346,19 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                         SizedBox(
                           height: 100,
                         ),
-                        Text("No Cards..."),
+                        Icon(
+                          FontAwesomeIcons.sadTear,
+                          size: 60,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                              text: "You have no Cards!\n   Yet!..",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20)),
+                        ),
                       ],
                     )));
           }

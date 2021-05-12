@@ -7,6 +7,7 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
 import 'package:meetwork/business_card_data.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
+import 'package:meetwork/screens/sub_screens/my_card_screen.dart';
 
 class BusinessCardScreen extends StatefulWidget {
   static const id = 'business_card_screen';
@@ -110,7 +111,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
               savePref("linkedin", linkedinController.text);
               print("Card Saved for " + nameController.text);
 
-              Navigator.pushNamed(context, CardCollectionScreen.id);
+              Navigator.pushNamed(context, MyCardScreen.id);
             },
             child: Text('Save Card'),
           ),
