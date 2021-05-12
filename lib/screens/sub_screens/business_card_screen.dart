@@ -38,7 +38,8 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           height: 230,
           width: double.maxFinite,
           child: Card(
-            elevation: 5,
+            elevation: 10,
+            shadowColor: Colors.orange,
             child: Padding(
               padding: EdgeInsets.all(24),
               child: Row(
@@ -92,7 +93,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
         ),
         Padding(
           padding: EdgeInsets.all(8.0),
-          child: ElevatedButton(
+          child: OutlinedButton.icon(
             onPressed: () {
               removePref("name");
               removePref("title");
@@ -113,7 +114,24 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
 
               Navigator.pushNamed(context, MyCardScreen.id);
             },
-            child: Text('Save Card'),
+            style: OutlinedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                shadowColor: Colors.orange,
+                elevation: 15,
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.elliptical(10, 15)))),
+            icon: const Icon(
+              Icons.save_alt,
+              color: Colors.white,
+              size: 20,
+            ),
+            label: RichText(
+                text: TextSpan(
+                    text: "Save Card",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold))),
           ),
         )
       ]),

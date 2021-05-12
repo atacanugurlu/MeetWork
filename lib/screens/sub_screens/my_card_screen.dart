@@ -247,7 +247,8 @@ class _MyCardScreenState extends State<MyCardScreen> {
                     height: 230,
                     width: double.maxFinite,
                     child: Card(
-                      elevation: 5,
+                      elevation: 10,
+                      shadowColor: Colors.orange,
                       child: Padding(
                         padding: EdgeInsets.all(24),
                         child: Row(
@@ -314,7 +315,7 @@ class _MyCardScreenState extends State<MyCardScreen> {
                               borderRadius:
                                   BorderRadius.all(Radius.elliptical(10, 15)))),
                       icon: const Icon(
-                        Icons.share,
+                        Icons.share_outlined,
                         color: Colors.white,
                         size: 20,
                       ),
