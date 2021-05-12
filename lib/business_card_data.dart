@@ -1,4 +1,5 @@
 class BusinessCardInfo {
+  int cardID;
   String name;
   String title;
   String company;
@@ -7,31 +8,27 @@ class BusinessCardInfo {
   String website;
   String linkedin;
 
-  BusinessCardInfo(
-      {this.name,
-      this.title,
-      this.company,
-      this.phone,
-      this.email,
-      this.website,
-      this.linkedin});
+  BusinessCardInfo(this.cardID, this.name, this.title, this.company, this.phone,
+      this.email, this.website, this.linkedin);
 
-  BusinessCardInfo.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        title = json['title'],
-        company = json['company'],
-        phone = json['phone'],
-        email = json['email'],
-        website = json['website'],
-        linkedin = json['linkedin'];
+  BusinessCardInfo.fromMap(Map<String, dynamic> map)
+      : cardID = map["cardID"],
+        name = map["name"],
+        title = map["title"],
+        company = map["company"],
+        phone = map["phone"],
+        email = map["email"],
+        website = map["website"],
+        linkedin = map["linkedin"];
 
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'title': title,
-        'company': company,
-        'phone': phone,
-        'email': email,
-        'website': website,
-        'linkedin': linkedin,
+  Map<String, dynamic> toMap() => {
+        "cardID": cardID,
+        "name": name,
+        "title": title,
+        "company": company,
+        "phone": phone,
+        "email": email,
+        "website": website,
+        "linkedin": linkedin,
       };
 }

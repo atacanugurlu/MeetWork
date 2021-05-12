@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meetwork/components/side_menu.dart';
+import 'package:meetwork/components/database.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
@@ -22,35 +23,36 @@ class CardCollectionScreen extends StatefulWidget {
 }
 
 class _CardCollectionScreenState extends State<CardCollectionScreen> {
-  String name;
-  String title;
-  String company;
-  String phone;
-  String email;
-  String website;
-  String linkedin;
+  DatabaseHelper _databaseHelper = DatabaseHelper();
+
+  void _addNote(BusinessCardInfo card) async {
+    await _databaseHelper.insert(card);
+  }
+
+  BusinessCardInfo atacan = BusinessCardInfo(1, "Atacan Ugurlu", "title",
+      "company", "phone", "email", "website", "linkedin");
+
+  BusinessCardInfo atacan1 = BusinessCardInfo(2, "Atacan LALAL", "VOLOLO",
+      "company", "phone", "email", "website", "linkedin");
+
+  List<BusinessCardInfo> allCards = [];
+
+  Future<String> getCards() async {
+    var cardsFuture = _databaseHelper.getAllCards();
+    await cardsFuture.then((value) => {
+          setState(() {
+            this.allCards = value;
+          })
+        });
+    return "Accomplished";
+  }
 
   @override
   void initState() {
     super.initState();
-
-    readPref().then((value) {
-      if (name == null) {
-        Navigator.pushNamed(context, BusinessCardScreen.id);
-      }
-    });
-  }
-
-  Future<String> readPref() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString("name");
-    title = prefs.getString("title");
-    company = prefs.getString("company");
-    phone = prefs.getString("phone");
-    email = prefs.getString("email");
-    website = prefs.getString("website");
-    linkedin = prefs.getString("linkedin");
-    return "Accomplished";
+    //_addNote(atacan);
+    //_addNote(atacan1);
+    getCards();
   }
 
   Widget personNameJobWidget(String name, String title) {
@@ -232,9 +234,9 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
 
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: readPref(),
+        future: getCards(),
         builder: (context, snapshot) {
-          if (name != null) {
+          if (true) {
             return Scaffold(
               drawer: BuildSideMenu(routeName: CardCollectionScreen.id),
               appBar: AppBar(
@@ -247,7 +249,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                   children: <Widget>[
                     Expanded(
                       child: ListView.builder(
-                          itemCount: 10, //From database
+                          itemCount: allCards.length,
                           itemBuilder: (context, index) {
                             return Container(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -266,8 +268,10 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                                             child: Stack(
                                               children: [
                                                 personNameJobWidget(
-                                                    name, title),
-                                                companyNameWidget(company),
+                                                    allCards[index].name,
+                                                    allCards[index].title),
+                                                companyNameWidget(
+                                                    allCards[index].company),
                                               ],
                                             ),
                                           ),
@@ -287,19 +291,23 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                                                   MainAxisAlignment.end,
                                               children: [
                                                 //fittedbox here
-                                                phoneWidget(phone),
+                                                phoneWidget(
+                                                    allCards[index].phone),
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                emailWidget(email),
+                                                emailWidget(
+                                                    allCards[index].email),
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                websiteWidget(website),
+                                                websiteWidget(
+                                                    allCards[index].website),
                                                 SizedBox(
                                                   height: 5,
                                                 ),
-                                                linkedinWidget(linkedin)
+                                                linkedinWidget(
+                                                    allCards[index].linkedin)
                                               ],
                                             ),
                                           ],
@@ -322,7 +330,14 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                     height: 230,
                     width: double.maxFinite,
-                    child: Text("Loading...")));
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 100,
+                        ),
+                        Text("No Cards..."),
+                      ],
+                    )));
           }
         });
   }

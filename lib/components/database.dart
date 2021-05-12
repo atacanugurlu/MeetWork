@@ -3,67 +3,62 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:meetwork/business_card_data.dart';
 
-class DBProvider {
-  DBProvider._();
-  static final DBProvider db = DBProvider._();
+class DatabaseHelper {
   static Database _database;
 
-  Future<Database> get database async {
-    if (_database != null) return _database;
+  String _cardsTable = "cards";
+  String _columnID = "cardID";
+  String _columnName = "name";
+  String _columnTitle = "title";
+  String _columnCompany = "company";
+  String _columnPhone = "phone";
+  String _columnEmail = "email";
+  String _columnWebsite = "website";
+  String _columnLinkedin = "linkedin";
 
-    _database = await initDB();
+  Future<Database> get database async {
+    if (_database == null) {
+      _database = await initializeDatabase();
+    }
     return _database;
   }
 
-  initDB() async {
-    return await openDatabase(join(await getDatabasesPath(), 'MWDatabase.db'),
-        onCreate: (db, version) async {
-      await db.execute('''
-        CREATE TABLE businessCardsTable (
-          name TEXT PRIMARY KEY,
-          title TEXT,
-          company TEXT,
-          phone TEXT,
-          email TEXT,
-          website TEXT,
-          linkedin TEXT,
-          )
-          ''');
-    }, version: 1);
+  Future<Database> initializeDatabase() async {
+    String dbPath = join(await getDatabasesPath(), "cards.db");
+    var cardsDb = await openDatabase(dbPath, version: 1, onCreate: createDb);
+    return cardsDb;
   }
 
-  newBusinessCard(BusinessCardInfo newBusinessCard) async {
-    final db = await database;
-    var res = await db.rawInsert('''
-      INSERT INTO businessCardsTable (
-        name,
-        title,
-        company,
-        phone,
-        email,
-        website,
-        linkedin
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)
-    ''', [
-      newBusinessCard.name,
-      newBusinessCard.title,
-      newBusinessCard.company,
-      newBusinessCard.phone,
-      newBusinessCard.email,
-      newBusinessCard.website,
-      newBusinessCard.linkedin
-    ]);
-    return res;
+  void createDb(Database db, int version) async {
+    await db.execute(
+        "Create table $_cardsTable($_columnID integer primary key, $_columnName text, $_columnTitle text, $_columnCompany text, $_columnPhone text, $_columnEmail text, $_columnWebsite text, $_columnLinkedin text)");
   }
 
-  Future<dynamic> getCard() async {
-    final db = await database;
-    var res = await db.query("businessCardsTable");
-    if (res.length == 0) {
-      return null;
-    } else {
-      var resMap = res[0];
-      return resMap.isNotEmpty ? resMap : Null;
-    }
+  Future<List<BusinessCardInfo>> getAllCards() async {
+    Database db = await this.database;
+    var result = await db.query("$_cardsTable");
+    return List.generate(result.length, (i) {
+      return BusinessCardInfo.fromMap(result[i]);
+    });
+  }
+
+  Future<int> insert(BusinessCardInfo card) async {
+    Database db = await this.database;
+    var result = await db.insert("$_cardsTable", card.toMap());
+    return result;
+  }
+
+  Future<int> update(BusinessCardInfo card) async {
+    Database db = await this.database;
+    var result = await db.update("$_cardsTable", card.toMap(),
+        where: "id=?", whereArgs: [card.cardID]);
+    return result;
+  }
+
+  Future<int> delete(int cardID) async {
+    Database db = await this.database;
+    var result =
+        await db.rawDelete("delete from $_cardsTable where id=$cardID");
+    return result;
   }
 }
