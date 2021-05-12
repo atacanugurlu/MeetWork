@@ -240,63 +240,92 @@ class _MyCardScreenState extends State<MyCardScreen> {
               appBar: AppBar(
                 title: Text("Your Business Card"),
               ),
-              body: Container(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                height: 230,
-                width: double.maxFinite,
-                child: Card(
-                  elevation: 5,
-                  child: Padding(
-                    padding: EdgeInsets.all(24),
-                    child: Row(
-                      children: [
-                        Stack(
-                          children: <Widget>[
+              body: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    height: 230,
+                    width: double.maxFinite,
+                    child: Card(
+                      elevation: 5,
+                      child: Padding(
+                        padding: EdgeInsets.all(24),
+                        child: Row(
+                          children: [
+                            Stack(
+                              children: <Widget>[
+                                Expanded(
+                                  flex: 10,
+                                  child: Stack(
+                                    children: [
+                                      personNameJobWidget(name, title),
+                                      companyNameWidget(company),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacer(
+                              flex: 1,
+                            ),
                             Expanded(
                               flex: 10,
                               child: Stack(
-                                children: [
-                                  personNameJobWidget(name, title),
-                                  companyNameWidget(company),
+                                children: <Widget>[
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      //fittedbox here
+                                      phoneWidget(phone),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      emailWidget(email),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      websiteWidget(website),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      linkedinWidget(linkedin)
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                        Spacer(
-                          flex: 1,
-                        ),
-                        Expanded(
-                          flex: 10,
-                          child: Stack(
-                            children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  //fittedbox here
-                                  phoneWidget(phone),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  emailWidget(email),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  websiteWidget(website),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  linkedinWidget(linkedin)
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  OutlinedButton.icon(
+                      onPressed: null, //USE NFC
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                          shadowColor: Colors.orange,
+                          elevation: 15,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.elliptical(10, 15)))),
+                      icon: const Icon(
+                        Icons.share,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      label: RichText(
+                          text: TextSpan(
+                              text: "Share Card",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold))))
+                ],
               ),
             );
           } else {
