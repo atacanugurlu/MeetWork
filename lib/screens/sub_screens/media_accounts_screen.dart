@@ -99,37 +99,35 @@ class ChoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 70,
+      height: 72,
       width: double.maxFinite,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        color: basePurple,
-        child: Row(children: [
-          SizedBox(
-            width: 15,
-          ),
-          Icon(choice.icon, size: 32.0, color: sideMenuColor2),
-          SizedBox(
-            width: 17,
-          ),
-          Container(
-            width: 200,
-            height: 130,
-            child: TextField(
-                keyboardType: TextInputType.text,
-                controller: choice.controllerName,
-                decoration: InputDecoration(
+      color: sideMenuColor2,
+      child: ListView(children: [
+        Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          color: basePurple,
+          child: ListTile(
+            leading: Icon(
+              choice.icon,
+              size: 35,
+              color: sideMenuColor2,
+            ),
+            title: TextFormField(
+              controller: choice.controllerName,
+              decoration: InputDecoration(
                   labelText: choice.mediaName,
-                  labelStyle: TextStyle(color: Colors.white70, fontSize: 18),
-                )),
+                  labelStyle: TextStyle(
+                    color: sideMenuColor2,
+                  )),
+            ),
+            trailing: Icon(
+              Icons.save,
+              color: sideMenuColor2,
+            ),
           ),
-          SizedBox(
-            width: 30,
-          ),
-        ]),
-      ),
+        ),
+      ]),
     );
   }
 }

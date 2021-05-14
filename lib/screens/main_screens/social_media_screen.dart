@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/add_social_media_screen.dart';
 
 class SocialMediaScreen extends StatefulWidget {
   static const id = 'social_media_screen';
@@ -54,12 +55,9 @@ const List<Choice> choices = const [
   const Choice(
       title: 'Share Card', icon: Icons.share, page: MediaAccountsScreen.id),
   const Choice(
-      title: 'Card Collection',
-      icon: Icons.collections_bookmark,
-      page: MediaAccountsScreen.id),
-  const Choice(title: 'LinkedIn', icon: FontAwesomeIcons.linkedin, page: "url"),
-  const Choice(
-      title: 'Blabla', icon: Icons.business, page: MediaAccountsScreen.id),
+      title: 'Add Friend',
+      icon: FontAwesomeIcons.userFriends,
+      page: AddSocialMediaScreen.id),
   const Choice(
       title: 'Preferences', icon: Icons.settings, page: MediaAccountsScreen.id),
 ];
