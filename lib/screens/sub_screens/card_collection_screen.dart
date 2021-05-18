@@ -282,6 +282,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                               width: double.maxFinite,
                               child: Card(
                                 elevation: 5,
+                                shadowColor: Colors.orange,
                                 child: Padding(
                                   padding: EdgeInsets.all(24),
                                   child: Row(
