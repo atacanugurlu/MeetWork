@@ -40,10 +40,10 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
     });
   }
 
-  BusinessCardInfo atacan = BusinessCardInfo(1, "Atacan Ugurlu", "title",
+  BusinessCardInfo atacan = BusinessCardInfo(3, "Atacan Ugurlu3", "title",
       "company", "phone", "email", "website", "linkedin");
 
-  BusinessCardInfo atacan1 = BusinessCardInfo(2, "Atacan LALAL", "VOLOLO",
+  BusinessCardInfo atacan1 = BusinessCardInfo(4, "Atacan4 LALAL", "VOLOLO",
       "company", "phone", "email", "website", "linkedin");
 
   List<BusinessCardInfo> allCards = [];
@@ -220,6 +220,20 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
     );
   }
 
+  Widget deleteCardWidget(int cardID) {
+    return GestureDetector(
+      onTap: () {
+        _databaseHelper.delete(cardID);
+      },
+      child: RichText(
+        text: TextSpan(
+            text: "Delete",
+            style: TextStyle(
+                color: Colors.orange, decoration: TextDecoration.underline)),
+      ),
+    );
+  }
+
   void phoneCall(String phoneNumber) {
     if (phoneNumber != null && phoneNumber != '') {
       launch('tel:${phoneNumber.replaceAll(' ', '').replaceAll('-', '')}');
@@ -274,17 +288,14 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                                     children: [
                                       Stack(
                                         children: <Widget>[
-                                          Expanded(
-                                            flex: 10,
-                                            child: Stack(
-                                              children: [
-                                                personNameJobWidget(
-                                                    allCards[index].name,
-                                                    allCards[index].title),
-                                                companyNameWidget(
-                                                    allCards[index].company),
-                                              ],
-                                            ),
+                                          Stack(
+                                            children: [
+                                              personNameJobWidget(
+                                                  allCards[index].name,
+                                                  allCards[index].title),
+                                              companyNameWidget(
+                                                  allCards[index].company),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -295,13 +306,16 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                                         flex: 10,
                                         child: Stack(
                                           children: <Widget>[
+                                            Align(
+                                                alignment: Alignment.topRight,
+                                                child: deleteCardWidget(
+                                                    allCards[index].cardID)),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               mainAxisAlignment:
                                                   MainAxisAlignment.end,
                                               children: [
-                                                //fittedbox here
                                                 phoneWidget(
                                                     allCards[index].phone),
                                                 SizedBox(

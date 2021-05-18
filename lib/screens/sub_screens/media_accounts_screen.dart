@@ -103,36 +103,35 @@ class ChoiceCard extends StatelessWidget {
       height: 72,
       width: double.maxFinite,
       color: sideMenuColor2,
-      child: ListView(children: [
-        Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10))),
-          color: basePurple,
-          child: ListTile(
-            leading: Icon(
-              choice.icon,
-              size: 35,
-              color: sideMenuColor2,
-            ),
-            title: TextFormField(
-              controller: choice.controllerName,
-              decoration: InputDecoration(
-                  labelText: choice.mediaName,
-                  labelStyle: TextStyle(
-                    color: sideMenuColor2,
-                  )),
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.save),
-              color: sideMenuColor2,
-              onPressed: () {
-                removePref(choice.mediaName);
-                savePref(choice.mediaName, choice.controllerName.text);
-              },
-            ),
+      child: Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        color: basePurple,
+        child: ListTile(
+          dense: true,
+          leading: Icon(
+            choice.icon,
+            size: 35,
+            color: sideMenuColor2,
+          ),
+          title: TextFormField(
+            controller: choice.controllerName,
+            decoration: InputDecoration(
+                labelText: choice.mediaName,
+                labelStyle: TextStyle(
+                  color: sideMenuColor2,
+                )),
+          ),
+          trailing: IconButton(
+            icon: Icon(Icons.save),
+            color: sideMenuColor2,
+            onPressed: () {
+              removePref(choice.mediaName);
+              savePref(choice.mediaName, choice.controllerName.text);
+            },
           ),
         ),
-      ]),
+      ),
     );
   }
 }

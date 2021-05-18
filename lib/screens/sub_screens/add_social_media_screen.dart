@@ -99,15 +99,16 @@ class ChoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
-      width: double.maxFinite,
-      color: sideMenuColor2,
-      child: ListView(children: [
-        Card(
+        height: 75,
+        width: double.maxFinite,
+        color: sideMenuColor2,
+        child: Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
           color: basePurple,
           child: ListTile(
+            onTap: () => print("object"),
+            dense: true,
             leading: Icon(
               choice.icon,
               size: 35,
@@ -127,8 +128,6 @@ class ChoiceCard extends StatelessWidget {
               color: sideMenuColor2,
             ),
           ),
-        ),
-      ]),
-    );
+        ));
   }
 }
