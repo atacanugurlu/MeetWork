@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
+import 'package:meetwork/screens/main_screens/business_screen.dart';
 
 class MediaAccountsScreen extends StatefulWidget {
   static const id = 'media_accounts_screen';
@@ -19,7 +20,7 @@ class _MediaAccountsScreenState extends State<MediaAccountsScreen> {
         backgroundColor: sideMenuColor2,
         drawer: BuildSideMenu(routeName: MediaAccountsScreen.id),
         appBar: AppBar(
-          title: Text("Social Media Accounts"),
+          title: Text("Set Accounts"),
         ),
         body: ListView.builder(
             primary: false,
@@ -121,9 +122,13 @@ class ChoiceCard extends StatelessWidget {
                     color: sideMenuColor2,
                   )),
             ),
-            trailing: Icon(
-              Icons.save,
+            trailing: IconButton(
+              icon: Icon(Icons.save),
               color: sideMenuColor2,
+              onPressed: () {
+                removePref(choice.mediaName);
+                savePref(choice.mediaName, choice.controllerName.text);
+              },
             ),
           ),
         ),

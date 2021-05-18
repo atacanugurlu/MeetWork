@@ -355,7 +355,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                         ),
                         RichText(
                           text: TextSpan(
-                              text: "You have no Cards!\n   Yet!..",
+                              text: "Cards Loading",
                               style:
                                   TextStyle(color: Colors.black, fontSize: 20)),
                         ),
