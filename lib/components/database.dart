@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
-import 'package:meetwork/business_card_data.dart';
+import 'package:meetwork/business_card_class.dart';
 
 class DatabaseHelper {
   static Database _database;

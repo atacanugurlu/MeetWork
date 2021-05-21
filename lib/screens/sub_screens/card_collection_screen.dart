@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/components/database.dart';
-import 'package:meetwork/constants.dart';
-import 'package:meetwork/screens/main_screens/business_screen.dart';
-import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:meetwork/business_card_data.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:meetwork/business_card_class.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 class CardCollectionScreen extends StatefulWidget {
   static const id = 'card_collection_screen';

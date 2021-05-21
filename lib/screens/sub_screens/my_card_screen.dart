@@ -11,7 +11,7 @@ import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:meetwork/business_card_data.dart';
+import 'package:meetwork/business_card_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyCardScreen extends StatefulWidget {
@@ -43,13 +43,15 @@ class _MyCardScreenState extends State<MyCardScreen> {
 
   Future<String> readPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = prefs.getString("name");
-    title = prefs.getString("title");
-    company = prefs.getString("company");
-    phone = prefs.getString("phone");
-    email = prefs.getString("email");
-    website = prefs.getString("website");
-    linkedin = prefs.getString("linkedin");
+    var myCardJSON = json.decode(prefs.getString("myCard"));
+    BusinessCardInfo myCard = BusinessCardInfo.fromMap(myCardJSON);
+    name = myCard.name;
+    title = myCard.title;
+    company = myCard.company;
+    phone = myCard.phone;
+    email = myCard.email;
+    website = myCard.website;
+    linkedin = myCard.linkedin;
     return "Accomplished";
   }
 

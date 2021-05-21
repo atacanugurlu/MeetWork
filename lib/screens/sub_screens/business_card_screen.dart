@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
-import 'package:meetwork/business_card_data.dart';
+import 'package:meetwork/business_card_class.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/my_card_screen.dart';
 
@@ -95,22 +95,18 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           padding: EdgeInsets.all(8.0),
           child: OutlinedButton.icon(
             onPressed: () {
-              removePref("name");
-              removePref("title");
-              removePref("company");
-              removePref("phone");
-              removePref("email");
-              removePref("website");
-              removePref("linkedin");
-
-              savePref("name", nameController.text);
-              savePref("title", titleController.text);
-              savePref("company", companyController.text);
-              savePref("phone", phoneController.text);
-              savePref("email", emailController.text);
-              savePref("website", websiteController.text);
-              savePref("linkedin", linkedinController.text);
-              print("Card Saved for " + nameController.text);
+              removePref("myCard");
+              BusinessCardInfo myCard = new BusinessCardInfo(
+                  0,
+                  nameController.text,
+                  titleController.text,
+                  companyController.text,
+                  phoneController.text,
+                  emailController.text,
+                  websiteController.text,
+                  linkedinController.text);
+              var myCardJSON = json.encode(myCard.toMap());
+              savePref("myCard", myCardJSON);
 
               Navigator.pushNamed(context, MyCardScreen.id);
             },
