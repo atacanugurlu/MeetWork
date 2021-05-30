@@ -70,11 +70,6 @@ const List<Choice> choices = const [
       icon: Icons.collections_bookmark,
       page: CardCollectionScreen.id),
   const Choice(title: 'LinkedIn', icon: FontAwesomeIcons.linkedin, page: "url"),
-  /* const Choice(
-      title: 'Blabla', icon: Icons.business, page: BusinessCardScreen.id),
-  const Choice(
-      title: 'Preferences', icon: Icons.settings, page: BusinessCardScreen.id),
-      */
 ];
 
 class ChoiceCard extends StatelessWidget {

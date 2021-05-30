@@ -9,6 +9,7 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/share_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:meetwork/business_card_class.dart';
@@ -308,7 +309,9 @@ class _MyCardScreenState extends State<MyCardScreen> {
                     height: 15,
                   ),
                   OutlinedButton.icon(
-                      onPressed: null, //USE NFC
+                      onPressed: () {
+                        Navigator.pushNamed(context, ShareCardScreen.id);
+                      },
                       style: OutlinedButton.styleFrom(
                           backgroundColor: Colors.orange,
                           shadowColor: Colors.orange,

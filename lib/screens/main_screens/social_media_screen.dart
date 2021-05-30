@@ -6,6 +6,7 @@ import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
 import 'package:meetwork/screens/sub_screens/add_social_media_screen.dart';
 import 'package:meetwork/screens/sub_screens/my_media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/share_media_screen.dart';
 
 class SocialMediaScreen extends StatefulWidget {
   static const id = 'social_media_screen';
@@ -62,7 +63,10 @@ const List<Choice> choices = const [
       icon: FontAwesomeIcons.userFriends,
       page: AddSocialMediaScreen.id),
   const Choice(
-      title: 'Preferences', icon: Icons.settings, page: MediaAccountsScreen.id),
+      //NFC
+      title: 'Share Accounts',
+      icon: Icons.share,
+      page: ShareMediaScreen.id),
 ];
 
 class ChoiceCard extends StatelessWidget {

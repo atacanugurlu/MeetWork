@@ -10,6 +10,8 @@ import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
 import 'package:meetwork/screens/sub_screens/my_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/add_social_media_screen.dart';
 import 'package:meetwork/screens/sub_screens/my_media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/share_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/share_media_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
           MyMediaAccountsScreen.id: (context) => MyMediaAccountsScreen(),
           MyCardScreen.id: (context) => MyCardScreen(),
           AddSocialMediaScreen.id: (context) => AddSocialMediaScreen(),
+          ShareMediaScreen.id: (context) => ShareMediaScreen(),
+          ShareCardScreen.id: (context) => ShareCardScreen(),
         });
   }
 }
