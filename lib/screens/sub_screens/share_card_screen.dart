@@ -74,8 +74,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                     height: 50,
                   ),
                   Stack(
-                    children: <Widget>[
-                      // Stroked text as border.
+                    children: <Widget>[                      
                       Text(
                         'Open NFC\nGet phones together',
                         style: TextStyle(
@@ -85,8 +84,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                             ..strokeWidth = 6
                             ..color = sideMenuColor2,
                         ),
-                      ),
-                      // Solid text as fill.
+                      ),                    
                       Text(
                         'Open NFC\nGet phones together',
                         style: TextStyle(

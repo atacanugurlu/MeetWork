@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AddSocialMediaScreen extends StatefulWidget {
   static const id = 'add_social_media_screen';
@@ -44,10 +45,12 @@ String linkedinAccount = "Atacan Ugurlu";
 String twitchAccount = "Atacan Ugurlu";
 
 class Choice {
-  Choice({this.accountName, this.mediaName, this.icon});
+  Choice({this.accountName, this.mediaName, this.link, this.icon});
   String accountName;
 
   String mediaName;
+
+  String link;
 
   IconData icon;
 }
@@ -56,38 +59,49 @@ List<Choice> choices = [
   Choice(
       mediaName: 'Facebook',
       icon: FontAwesomeIcons.facebook,
+      link: "https://www.facebook.com/search/people" + facebookAccount,
       accountName: facebookAccount),
   Choice(
       mediaName: 'Instagram',
       icon: FontAwesomeIcons.instagram,
+      link: 'https://www.instagram.com/' + instagramAccount,
       accountName: instagramAccount),
   Choice(
       mediaName: 'Twitter',
       icon: FontAwesomeIcons.twitter,
+      link: "https://twitter.com/search/" + twitterAccount,
       accountName: twitterAccount),
   Choice(
       mediaName: 'Tumblr',
       icon: FontAwesomeIcons.tumblr,
+      link: "https://www.tumblr.com/search/" + tumblrAccount,
       accountName: tumblrAccount),
   Choice(
       mediaName: 'Youtube',
       icon: FontAwesomeIcons.youtube,
+      link: "https://www.youtube.com/results?search_query=" + youtubeAccount,
       accountName: youtubeAccount),
   Choice(
       mediaName: 'Tiktok',
       icon: FontAwesomeIcons.tiktok,
+      link: "https://www.tiktok.com/search?q=" + tiktokAccount,
       accountName: tiktokAccount),
   Choice(
       mediaName: 'Reddit',
       icon: FontAwesomeIcons.reddit,
+      link: "https://www.reddit.com/search/?q=" + redditAccount,
       accountName: redditAccount),
   Choice(
       mediaName: 'LinkedIn',
       icon: FontAwesomeIcons.linkedin,
+      link: "https://www.linkedin.com/search/results/all/?keywords=" +
+          linkedinAccount +
+          "&origin=GLOBAL_SEARCH_HEADER",
       accountName: linkedinAccount),
   Choice(
       mediaName: 'Twitch',
       icon: FontAwesomeIcons.twitch,
+      link: "https://www.twitch.tv/search?term=" + twitchAccount,
       accountName: twitchAccount),
 ];
 
@@ -107,7 +121,9 @@ class ChoiceCard extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10))),
           color: basePurple,
           child: ListTile(
-            onTap: () => print("object"),
+            onTap: () {
+              launchURL(choice.link);
+            },
             dense: true,
             leading: Icon(
               choice.icon,
@@ -131,3 +147,7 @@ class ChoiceCard extends StatelessWidget {
         ));
   }
 }
+
+void launchURL(mediaName) async => (await canLaunch(mediaName))
+    ? await launch(mediaName)
+    : throw 'Could not launch $mediaName';

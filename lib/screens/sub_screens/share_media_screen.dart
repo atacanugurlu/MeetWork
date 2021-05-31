@@ -93,7 +93,6 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                   ),
                   Stack(
                     children: <Widget>[
-                      // Stroked text as border.
                       Text(
                         'Open NFC\nGet phones together',
                         style: TextStyle(
@@ -104,7 +103,6 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                             ..color = Colors.white,
                         ),
                       ),
-                      // Solid text as fill.
                       Text(
                         'Open NFC\nGet phones together',
                         style: TextStyle(

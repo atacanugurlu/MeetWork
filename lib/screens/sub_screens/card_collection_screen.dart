@@ -365,7 +365,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
                         ),
                         RichText(
                           text: TextSpan(
-                              text: "Cards Loading",
+                              text: "No Cards",
                               style:
                                   TextStyle(color: Colors.black, fontSize: 20)),
                         ),

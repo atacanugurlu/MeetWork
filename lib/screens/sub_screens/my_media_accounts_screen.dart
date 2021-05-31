@@ -172,7 +172,7 @@ class ChoiceCard extends StatelessWidget {
           ),
           subtitle: RichText(
             text: TextSpan(
-                text: choice.accountName,
+                text: choice.accountName ?? "Not Available",
                 style: TextStyle(
                     color: Colors.white, fontWeight: FontWeight.w500)),
           ),
