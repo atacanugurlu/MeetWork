@@ -1,13 +1,10 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meetwork/components/side_menu.dart';
-import 'package:meetwork/constants.dart';
-import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/share_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
