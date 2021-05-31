@@ -36,7 +36,7 @@ class _AddSocialMediaScreenState extends State<AddSocialMediaScreen> {
 
 String facebookAccount = "Atacan Ugurlu";
 String instagramAccount = "Atacan Ugurlu";
-String tumblrAccount = "Atacan Ugurlu";
+String tumblrAccount;
 String twitterAccount = "Atacan Ugurlu";
 String tiktokAccount = "Atacan Ugurlu";
 String youtubeAccount = "Atacan Ugurlu";
@@ -60,49 +60,50 @@ List<Choice> choices = [
       mediaName: 'Facebook',
       icon: FontAwesomeIcons.facebook,
       link: "https://www.facebook.com/search/people" + facebookAccount,
-      accountName: facebookAccount),
+      accountName: facebookAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Instagram',
       icon: FontAwesomeIcons.instagram,
-      link: 'https://www.instagram.com/' + instagramAccount,
-      accountName: instagramAccount),
+      link: 'https://www.instagram.com/' + (instagramAccount ?? "NAN"),
+      accountName: instagramAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Twitter',
       icon: FontAwesomeIcons.twitter,
-      link: "https://twitter.com/search/" + twitterAccount,
-      accountName: twitterAccount),
+      link: "https://twitter.com/search/" + (twitterAccount ?? "NAN"),
+      accountName: twitterAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Tumblr',
       icon: FontAwesomeIcons.tumblr,
-      link: "https://www.tumblr.com/search/" + tumblrAccount,
-      accountName: tumblrAccount),
+      link: "https://www.tumblr.com/search/" + (tumblrAccount ?? "NAN"),
+      accountName: tumblrAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Youtube',
       icon: FontAwesomeIcons.youtube,
-      link: "https://www.youtube.com/results?search_query=" + youtubeAccount,
-      accountName: youtubeAccount),
+      link: "https://www.youtube.com/results?search_query=" +
+          (youtubeAccount ?? "NAN"),
+      accountName: youtubeAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Tiktok',
       icon: FontAwesomeIcons.tiktok,
-      link: "https://www.tiktok.com/search?q=" + tiktokAccount,
-      accountName: tiktokAccount),
+      link: "https://www.tiktok.com/search?q=" + (tiktokAccount ?? "NAN"),
+      accountName: tiktokAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Reddit',
       icon: FontAwesomeIcons.reddit,
-      link: "https://www.reddit.com/search/?q=" + redditAccount,
-      accountName: redditAccount),
+      link: "https://www.reddit.com/search/?q=" + (redditAccount ?? "NAN"),
+      accountName: redditAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'LinkedIn',
       icon: FontAwesomeIcons.linkedin,
       link: "https://www.linkedin.com/search/results/all/?keywords=" +
-          linkedinAccount +
+          (linkedinAccount ?? "NAN") +
           "&origin=GLOBAL_SEARCH_HEADER",
-      accountName: linkedinAccount),
+      accountName: linkedinAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Twitch',
       icon: FontAwesomeIcons.twitch,
-      link: "https://www.twitch.tv/search?term=" + twitchAccount,
-      accountName: twitchAccount),
+      link: "https://www.twitch.tv/search?term=" + (twitchAccount ?? "NAN"),
+      accountName: twitchAccount ?? "NOT AVAILABLE"),
 ];
 
 class ChoiceCard extends StatelessWidget {
@@ -122,7 +123,33 @@ class ChoiceCard extends StatelessWidget {
           color: basePurple,
           child: ListTile(
             onTap: () {
-              launchURL(choice.link);
+              if (choice.accountName != "NOT AVAILABLE") {
+                launchURL(choice.link);
+              } else {
+                AlertDialog alert = AlertDialog(
+                  content: Text(
+                    "User does not have a/an " + choice.mediaName + " account",
+                    style: TextStyle(color: sideMenuColor2, fontSize: 24),
+                  ),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Understood",
+                          style: TextStyle(color: Colors.purple, fontSize: 18),
+                        ))
+                  ],
+                  elevation: 25,
+                );
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return alert;
+                  },
+                );
+              }
             },
             dense: true,
             leading: Icon(
