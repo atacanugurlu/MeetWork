@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
+import '../../media_info_class.dart';
 
 class ShareMediaScreen extends StatefulWidget {
   static const id = 'share_media_screen';
@@ -24,6 +25,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
   String redditAccount;
   String linkedinAccount;
   String twitchAccount;
+  var mediaJSON;
 
   @override
   void initState() {
@@ -54,7 +56,19 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
     redditAccount = prefs.getString("Reddit Account");
     linkedinAccount = prefs.getString("LinkedIn Account");
     twitchAccount = prefs.getString("Twitch Account");
-    return "Accomplished";
+
+    SocialMediaInfo myInfo = new SocialMediaInfo(
+        facebookAccount,
+        instagramAccount,
+        tumblrAccount,
+        twitterAccount,
+        tiktokAccount,
+        youtubeAccount,
+        redditAccount,
+        linkedinAccount,
+        twitchAccount);
+    mediaJSON = json.encode(myInfo.toMap());
+    return "Done";
   }
 
   Widget build(BuildContext context) {

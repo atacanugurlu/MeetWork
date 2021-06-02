@@ -238,7 +238,7 @@ class _MyCardScreenState extends State<MyCardScreen> {
             return Scaffold(
               drawer: BuildSideMenu(routeName: MyCardScreen.id),
               appBar: AppBar(
-                title: Text("Your Business Card"),
+                title: Text("My Business Card"),
               ),
               body: Column(
                 children: [

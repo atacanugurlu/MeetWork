@@ -22,6 +22,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
   String email;
   String website;
   String linkedin;
+  var cardJSON;
 
   @override
   void initState() {
@@ -36,7 +37,9 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
 
   Future<String> readPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var myCardJSON = json.decode(prefs.getString("myCard"));
+    cardJSON = prefs.getString("myCard");
+    var myCardJSON = json.decode(cardJSON);
+
     BusinessCardInfo myCard = BusinessCardInfo.fromMap(myCardJSON);
     name = myCard.name;
     title = myCard.title;
@@ -45,7 +48,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
     email = myCard.email;
     website = myCard.website;
     linkedin = myCard.linkedin;
-    return "Accomplished";
+    return "Done";
   }
 
   Widget build(BuildContext context) {
@@ -74,7 +77,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                     height: 50,
                   ),
                   Stack(
-                    children: <Widget>[                      
+                    children: <Widget>[
                       Text(
                         'Open NFC\nGet phones together',
                         style: TextStyle(
@@ -84,7 +87,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                             ..strokeWidth = 6
                             ..color = sideMenuColor2,
                         ),
-                      ),                    
+                      ),
                       Text(
                         'Open NFC\nGet phones together',
                         style: TextStyle(
