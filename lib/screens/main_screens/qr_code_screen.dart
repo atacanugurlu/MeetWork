@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meetwork/components/side_menu.dart';
-import 'package:meetwork/constants.dart';
 
 class QRCodeScreen extends StatefulWidget {
   static const id = 'qr_code_screen';

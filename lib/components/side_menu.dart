@@ -5,6 +5,11 @@ import 'package:meetwork/screens/main_screens/qr_code_screen.dart';
 import 'package:meetwork/screens/main_screens/social_media_screen.dart';
 import 'package:meetwork/screens/main_screens/opening_screen.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:meetwork/components/business_card_class.dart';
+import 'dart:convert';
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 
 class BuildSideMenu extends StatefulWidget {
   final String routeName;
@@ -16,6 +21,7 @@ class BuildSideMenu extends StatefulWidget {
 enum Screen { home, social, business, qrcode }
 
 class _BuildSideMenuState extends State<BuildSideMenu> {
+  String name;
   Color activeColor = basePurple;
   Color inactiveColor = sideMenuColor;
   Screen selectedScreen;
@@ -35,6 +41,21 @@ class _BuildSideMenuState extends State<BuildSideMenu> {
   void initState() {
     super.initState();
     updateColor(widget.routeName);
+    readPref();
+  }
+
+  Future<String> readPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String cardMap = prefs.getString("myCard");
+    if (cardMap == null) {
+    } else {
+      var myCardJSON = json.decode(cardMap);
+      OwnCard myCard = OwnCard.fromMap(myCardJSON);
+      setState(() {
+        name = myCard.name;
+      });
+    }
+    return "Accomplished";
   }
 
   @override
@@ -60,7 +81,7 @@ class _BuildSideMenuState extends State<BuildSideMenu> {
                       alignment: Alignment.bottomRight,
                       child: RichText(
                           textAlign: TextAlign.right,
-                          text: TextSpan(text: 'Atacan Uğurlu')),
+                          text: TextSpan(text: name)),
                     )
                   ]),
                 ),
