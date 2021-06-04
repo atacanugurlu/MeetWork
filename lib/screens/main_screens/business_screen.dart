@@ -5,9 +5,11 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/business_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/card_collection_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/manually_add_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:meetwork/screens/main_screens/business_screen.dart';
 
 class BusinessScreen extends StatefulWidget {
   static const id = 'business_screen';
@@ -69,6 +71,10 @@ const List<Choice> choices = const [
       icon: Icons.collections_bookmark,
       page: CardCollectionScreen.id),
   const Choice(title: 'LinkedIn', icon: FontAwesomeIcons.linkedin, page: "url"),
+  const Choice(
+      title: 'Manually Add Card',
+      icon: FontAwesomeIcons.userTag,
+      page: ManuallyAddCardScreen.id),
 ];
 
 class ChoiceCard extends StatelessWidget {
@@ -123,9 +129,4 @@ savePref(String key, String value) async {
 removePref(String key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove(key);
-}
-
-incrementCardId(String key, String value) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setString(key, value);
 }

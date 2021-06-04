@@ -42,7 +42,6 @@ class _MyCardScreenState extends State<MyCardScreen> {
   Future<String> readPref() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String cardMap = prefs.getString("myCard");
-    print(cardMap);
     if (cardMap == null) {
       Navigator.pushNamed(context, BusinessCardScreen.id);
     } else {

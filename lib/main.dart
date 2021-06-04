@@ -6,6 +6,7 @@ import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/main_screens/qr_code_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/business_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/card_collection_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/manually_add_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/media_screens/media_accounts_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/media_screens/add_social_media_screen.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
           AddSocialMediaScreen.id: (context) => AddSocialMediaScreen(),
           ShareMediaScreen.id: (context) => ShareMediaScreen(),
           ShareCardScreen.id: (context) => ShareCardScreen(),
+          ManuallyAddCardScreen.id: (context) => ManuallyAddCardScreen()
         });
   }
 }
