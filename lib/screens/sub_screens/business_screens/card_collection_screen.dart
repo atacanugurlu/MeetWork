@@ -7,8 +7,8 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/components/database.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
-import 'package:meetwork/screens/sub_screens/business_screens/business_card_class.dart';
-import 'package:nfc_manager/nfc_manager.dart';
+import 'package:meetwork/components/business_card_class.dart';
+import 'package:meetwork/constants.dart';
 
 class CardCollectionScreen extends StatefulWidget {
   static const id = 'card_collection_screen';
@@ -27,7 +27,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
     });
   }
 
-  void _deleteCard(int deletedCardId, int deletedCardIndex) async {
+  void _deleteCard(int deletedCardId) async {
     await _databaseHelper.delete(deletedCardId);
 
     setState(() {
@@ -35,11 +35,15 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
     });
   }
 
-  BusinessCardInfo atacan = BusinessCardInfo(3, "Atacan Ugurlu3", "title",
-      "company", "phone", "email", "website", "linkedin");
-
-  BusinessCardInfo atacan1 = BusinessCardInfo(4, "Atacan4 LALAL", "VOLOLO",
-      "company", "phone", "email", "website", "linkedin");
+  BusinessCardInfo atacanUgurlu = BusinessCardInfo(
+      1,
+      "Atacan Ugurlu",
+      "Computer Engineer",
+      "Hacettepe University",
+      "+905377120027",
+      "atacanugurlu@gmail.com",
+      "www.atacanugurlu.com",
+      "atacanugurlu-327453");
 
   List<BusinessCardInfo> allCards = [];
 
@@ -56,8 +60,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
   @override
   void initState() {
     super.initState();
-    //_addCard(atacan);
-    //_addCard(atacan1);
+    //_addCard(atacanUgurlu);
     getCards();
   }
 
@@ -218,7 +221,38 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
   Widget deleteCardWidget(int cardID) {
     return GestureDetector(
       onTap: () {
-        _databaseHelper.delete(cardID);
+        AlertDialog alert = AlertDialog(
+          content: Text(
+            "Are you sure?",
+            style: TextStyle(color: sideMenuColor2, fontSize: 24),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  _deleteCard(cardID);
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "YES",
+                  style: TextStyle(color: Colors.orange, fontSize: 18),
+                )),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "NO",
+                  style: TextStyle(color: Colors.orange, fontSize: 18),
+                ))
+          ],
+          elevation: 25,
+        );
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
       },
       child: RichText(
         text: TextSpan(

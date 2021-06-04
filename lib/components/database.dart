@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
-import 'package:meetwork/screens/sub_screens/business_screens/business_card_class.dart';
+import 'package:meetwork/components/business_card_class.dart';
 
 class DatabaseHelper {
   static Database _database;
@@ -58,7 +58,7 @@ class DatabaseHelper {
   Future<int> delete(int cardID) async {
     Database db = await this.database;
     var result =
-        await db.rawDelete("delete from $_cardsTable where id=$cardID");
+        await db.rawDelete("delete from $_cardsTable where cardId=$cardID");
     return result;
   }
 }

@@ -5,7 +5,7 @@ import 'package:meetwork/screens/sub_screens/business_screens/business_card_scre
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:meetwork/screens/sub_screens/business_screens/business_card_class.dart';
+import 'package:meetwork/components/business_card_class.dart';
 
 class ShareCardScreen extends StatefulWidget {
   static const id = 'share_card_screen';

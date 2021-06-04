@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:meetwork/screens/sub_screens/media_screens/media_accounts_screen.dart';
-import 'media_info_class.dart';
+import '../../../components/media_info_class.dart';
 
 class ShareMediaScreen extends StatefulWidget {
   static const id = 'share_media_screen';

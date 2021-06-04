@@ -8,7 +8,6 @@ import 'package:meetwork/screens/sub_screens/business_screens/card_collection_sc
 import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
 class BusinessScreen extends StatefulWidget {
   static const id = 'business_screen';
@@ -124,4 +123,9 @@ savePref(String key, String value) async {
 removePref(String key) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.remove(key);
+}
+
+incrementCardId(String key, String value) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  prefs.setString(key, value);
 }

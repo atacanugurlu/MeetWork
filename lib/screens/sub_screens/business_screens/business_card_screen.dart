@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/card_collection_screen.dart';
-import 'package:meetwork/screens/sub_screens/business_screens/business_card_class.dart';
+import 'package:meetwork/components/business_card_class.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
 
@@ -96,8 +96,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
           child: OutlinedButton.icon(
             onPressed: () {
               removePref("myCard");
-              BusinessCardInfo myCard = new BusinessCardInfo(
-                  0,
+              OwnCard myCard = new OwnCard(
                   nameController.text,
                   titleController.text,
                   companyController.text,
