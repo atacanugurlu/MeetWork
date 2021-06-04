@@ -4,14 +4,14 @@ import 'package:meetwork/screens/main_screens/social_media_screen.dart';
 import 'package:meetwork/screens/main_screens/opening_screen.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/main_screens/qr_code_screen.dart';
-import 'package:meetwork/screens/sub_screens/business_card_screen.dart';
-import 'package:meetwork/screens/sub_screens/card_collection_screen.dart';
-import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
-import 'package:meetwork/screens/sub_screens/my_card_screen.dart';
-import 'package:meetwork/screens/sub_screens/add_social_media_screen.dart';
-import 'package:meetwork/screens/sub_screens/my_media_accounts_screen.dart';
-import 'package:meetwork/screens/sub_screens/share_card_screen.dart';
-import 'package:meetwork/screens/sub_screens/share_media_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/business_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/card_collection_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/add_social_media_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/my_media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/share_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/share_media_screen.dart';
 
 void main() {
   runApp(MyApp());

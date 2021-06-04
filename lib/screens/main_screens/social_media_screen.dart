@@ -3,10 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
-import 'package:meetwork/screens/sub_screens/media_accounts_screen.dart';
-import 'package:meetwork/screens/sub_screens/add_social_media_screen.dart';
-import 'package:meetwork/screens/sub_screens/my_media_accounts_screen.dart';
-import 'package:meetwork/screens/sub_screens/share_media_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/add_social_media_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/my_media_accounts_screen.dart';
+import 'package:meetwork/screens/sub_screens/media_screens/share_media_screen.dart';
 
 class SocialMediaScreen extends StatefulWidget {
   static const id = 'social_media_screen';
