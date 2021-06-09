@@ -293,6 +293,7 @@ class _CardCollectionScreenState extends State<CardCollectionScreen> {
             return Scaffold(
               drawer: BuildSideMenu(routeName: CardCollectionScreen.id),
               appBar: AppBar(
+                backgroundColor: sideMenuColor,
                 title: Text("Business Cards"),
               ),
               body: Container(

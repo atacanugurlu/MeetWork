@@ -11,6 +11,8 @@ import 'package:meetwork/screens/sub_screens/business_screens/card_collection_sc
 import 'package:meetwork/screens/sub_screens/business_screens/manually_add_card_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../constants.dart';
+
 class ManuallyAddCardScreen extends StatefulWidget {
   static const id = 'manually_add_card_screen';
   @override
@@ -58,6 +60,7 @@ class _ManuallyAddCardScreenState extends State<ManuallyAddCardScreen> {
     return Scaffold(
       drawer: BuildSideMenu(routeName: ManuallyAddCardScreen.id),
       appBar: AppBar(
+        backgroundColor: sideMenuColor,
         title: Text("Add Card"),
       ),
       body: Column(children: <Widget>[

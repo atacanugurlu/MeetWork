@@ -34,7 +34,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
   final Strategy strategy = Strategy.P2P_STAR;
   Map<String, ConnectionInfo> endpointMap = Map();
 
-  File tempFile; //reference to the file currently being transferred
+  File tempFile;
   Map<int, String> map = Map();
 
   @override
@@ -86,6 +86,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
           if (name != null) {
             return Scaffold(
               appBar: AppBar(
+                backgroundColor: sideMenuColor,
                 title: Text("Share Card"),
               ),
               body: Center(
@@ -96,109 +97,188 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                       RichText(
                           text: TextSpan(
                               text: "Permissions",
-                              style: TextStyle(color: sideMenuColor2))),
-                      Wrap(
+                              style: TextStyle(
+                                  color: sideMenuColor2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18))),
+                      Column(
                         children: <Widget>[
                           ElevatedButton(
-                            child: Text("checkLocationPermission"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Check Location Permission"),
                             onPressed: () async {
                               if (await Nearby().checkLocationPermission()) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(
-                                            "Location permissions granted :)")));
+                                            "Location permission granted")));
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                        "Location permissions not granted :(")));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "Location permission NOT granted")));
                               }
                             },
                           ),
                           ElevatedButton(
-                            child: Text("askLocationPermission"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Ask Location Permission",
+                                style: TextStyle(color: Colors.orange)),
                             onPressed: () async {
                               if (await Nearby().askLocationPermission()) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                         content: Text(
-                                            "Location Permission granted :)")));
+                                            "Location permission granted")));
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                        "Location permissions not granted :(")));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "Location permission NOT granted")));
                               }
                             },
                           ),
                           ElevatedButton(
-                            child: Text("checkExternalStoragePermission"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Check External Storage Permission"),
                             onPressed: () async {
                               if (await Nearby()
                                   .checkExternalStoragePermission()) {
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(
-                                        "External Storage permissions granted :)")));
+                                        "External storage permission granted")));
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                     content: Text(
-                                        "External Storage permissions not granted :(")));
+                                        "External storage permission NOT granted")));
                               }
                             },
                           ),
                           ElevatedButton(
-                            child: Text("askExternalStoragePermission"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text(
+                              "Ask External Storage Permission",
+                              style: TextStyle(color: Colors.orange),
+                            ),
                             onPressed: () {
                               Nearby().askExternalStoragePermission();
                             },
                           ),
                         ],
                       ),
-                      Divider(),
+                      Divider(
+                        thickness: 1.2,
+                        color: sideMenuColor2,
+                      ),
                       RichText(
                           text: TextSpan(
-                              text: "Location Enabled",
-                              style: TextStyle(color: sideMenuColor2))),
-                      Wrap(
+                              text: "Location",
+                              style: TextStyle(
+                                  color: sideMenuColor2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18))),
+                      Column(
                         children: <Widget>[
                           ElevatedButton(
-                            child: Text("checkLocationEnabled"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Check Location Enabled"),
                             onPressed: () async {
                               if (await Nearby().checkLocationEnabled()) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text("Location is ON :)")));
+                                    SnackBar(content: Text("Location is ON")));
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text("Location is OFF :(")));
+                                    SnackBar(content: Text("Location is OFF")));
                               }
                             },
                           ),
                           ElevatedButton(
-                            child: Text("enableLocationServices"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Enable Location Services",
+                                style: TextStyle(color: Colors.orange)),
                             onPressed: () async {
                               if (await Nearby().enableLocationServices()) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                        content: Text(
-                                            "Location Service Enabled :)")));
+                                        content:
+                                            Text("Location Service Enabled")));
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                        "Enabling Location Service Failed :(")));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "Enabling Location Service Failed")));
                               }
                             },
                           ),
                         ],
                       ),
-                      Divider(),
+                      Divider(
+                        thickness: 1.2,
+                        color: sideMenuColor2,
+                      ),
                       RichText(
                           text: TextSpan(
                               text: "User Name: " + userName,
-                              style: TextStyle(color: sideMenuColor2))),
-                      Wrap(
+                              style: TextStyle(
+                                  color: sideMenuColor2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18))),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           ElevatedButton(
-                            child: Text("Start Advertising"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Search Devices",
+                                style: TextStyle(color: Colors.orange)),
                             onPressed: () async {
                               try {
                                 bool a = await Nearby().startAdvertising(
@@ -216,24 +296,46 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                     });
                                   },
                                 );
-                                showSnackbar("ADVERTISING: " + a.toString());
+                                showSnackbar(": " + a.toString());
                               } catch (exception) {
                                 showSnackbar(exception);
                               }
                             },
                           ),
+                          SizedBox(
+                            width: 6,
+                          ),
                           ElevatedButton(
-                            child: Text("Stop Advertising"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Stop Searching for Devices",
+                                style: TextStyle(color: Colors.red)),
                             onPressed: () async {
                               await Nearby().stopAdvertising();
                             },
                           ),
                         ],
                       ),
-                      Wrap(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           ElevatedButton(
-                            child: Text("Start Discovery"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Become Visible",
+                                style: TextStyle(color: Colors.orange)),
                             onPressed: () async {
                               try {
                                 bool a = await Nearby().startDiscovery(
@@ -294,48 +396,48 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                               }
                             },
                           ),
+                          SizedBox(
+                            width: 6,
+                          ),
                           ElevatedButton(
-                            child: Text("Stop Discovery"),
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(6.0))),
+                                backgroundColor:
+                                    MaterialStateProperty.all(sideMenuColor2)),
+                            child: Text("Become Invisible",
+                                style: TextStyle(color: Colors.red)),
                             onPressed: () async {
                               await Nearby().stopDiscovery();
                             },
                           ),
                         ],
                       ),
+                      Divider(
+                        thickness: 1.2,
+                        color: sideMenuColor2,
+                      ),
                       RichText(
                           text: TextSpan(
                               text:
                                   "Number of connected devices: ${endpointMap.length}",
-                              style: TextStyle(color: sideMenuColor2))),
+                              style: TextStyle(
+                                  color: sideMenuColor2,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18))),
                       ElevatedButton(
-                        child: Text("Stop All Endpoints"),
-                        onPressed: () async {
-                          await Nearby().stopAllEndpoints();
-                          setState(() {
-                            endpointMap.clear();
-                          });
-                        },
-                      ),
-                      Divider(),
-                      RichText(
-                          text: TextSpan(
-                              text: "Sending Data",
-                              style: TextStyle(color: sideMenuColor2))),
-                      ElevatedButton(
-                        child: Text("Send Random Bytes Payload"),
-                        onPressed: () async {
-                          endpointMap.forEach((key, value) {
-                            String a = Random().nextInt(100).toString();
-
-                            showSnackbar(
-                                "Sending $a to ${value.endpointName}, id: $key");
-                            Nearby().sendBytesPayload(
-                                key, Uint8List.fromList(a.codeUnits));
-                          });
-                        },
-                      ),
-                      ElevatedButton(
-                        child: Text("Send File Payload"),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0))),
+                            backgroundColor:
+                                MaterialStateProperty.all(sideMenuColor2)),
+                        child: Text("Share Card",
+                            style: TextStyle(color: Colors.orange)),
                         onPressed: () async {
                           PickedFile file = await ImagePicker()
                               .getImage(source: ImageSource.gallery);
@@ -353,6 +455,23 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                     "$payloadId:${file.path.split('/').last}"
                                         .codeUnits));
                           }
+                        },
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0))),
+                            backgroundColor:
+                                MaterialStateProperty.all(sideMenuColor2)),
+                        child: Text("Stop All Connections",
+                            style: TextStyle(color: Colors.red)),
+                        onPressed: () async {
+                          await Nearby().stopAllEndpoints();
+                          setState(() {
+                            endpointMap.clear();
+                          });
                         },
                       ),
                     ],
@@ -415,7 +534,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                               tempFile.rename(
                                   tempFile.parent.path + "/" + fileName);
                             } else {
-                              showSnackbar("File doesn't exist");
+                              showSnackbar("Card doesn't exist");
                             }
                           } else {
                             //add to map if not already
@@ -423,7 +542,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                           }
                         }
                       } else if (payload.type == PayloadType.FILE) {
-                        showSnackbar(endid + ": File transfer started");
+                        showSnackbar(endid + ": Sharing Card");
                         tempFile = File(payload.filePath);
                       }
                     },
@@ -434,7 +553,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.FAILURE) {
                         print("failed");
-                        showSnackbar(endid + ": FAILED to transfer file");
+                        showSnackbar(endid + ": FAILED to share card");
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.SUCCESS) {
                         showSnackbar(

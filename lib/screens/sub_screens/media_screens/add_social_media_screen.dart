@@ -20,6 +20,7 @@ class _AddSocialMediaScreenState extends State<AddSocialMediaScreen> {
         backgroundColor: sideMenuColor2,
         drawer: BuildSideMenu(routeName: AddSocialMediaScreen.id),
         appBar: AppBar(
+          backgroundColor: sideMenuColor,
           title: Text("Add Friend"),
         ),
         body: ListView.builder(

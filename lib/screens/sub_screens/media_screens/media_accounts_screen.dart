@@ -20,6 +20,7 @@ class _MediaAccountsScreenState extends State<MediaAccountsScreen> {
         backgroundColor: sideMenuColor2,
         drawer: BuildSideMenu(routeName: MediaAccountsScreen.id),
         appBar: AppBar(
+          backgroundColor: sideMenuColor,
           title: Text("Set Accounts"),
         ),
         body: ListView.builder(

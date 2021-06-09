@@ -7,6 +7,7 @@ import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/components/business_card_class.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
+import '../../../constants.dart';
 
 class BusinessCardScreen extends StatefulWidget {
   static const id = 'business_card_screen';
@@ -29,6 +30,7 @@ class _BusinessCardScreenState extends State<BusinessCardScreen> {
     return Scaffold(
       drawer: BuildSideMenu(routeName: BusinessCardScreen.id),
       appBar: AppBar(
+        backgroundColor: sideMenuColor,
         title: Text("Create a Card"),
       ),
       body: Column(children: <Widget>[

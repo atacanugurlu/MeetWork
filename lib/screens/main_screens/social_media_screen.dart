@@ -22,6 +22,7 @@ class _SocialMediaScreenState extends State<SocialMediaScreen> {
       backgroundColor: sideMenuColor2,
       drawer: BuildSideMenu(routeName: SocialMediaScreen.id),
       appBar: AppBar(
+        backgroundColor: sideMenuColor,
         title: Text("Social Media"),
       ),
       body: GridView.count(

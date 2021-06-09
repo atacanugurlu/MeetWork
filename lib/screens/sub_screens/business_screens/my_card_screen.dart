@@ -12,6 +12,8 @@ import 'package:maps_launcher/maps_launcher.dart';
 import 'package:meetwork/components/business_card_class.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../constants.dart';
+
 class MyCardScreen extends StatefulWidget {
   static const id = 'my_card_screen';
 
@@ -244,6 +246,7 @@ class _MyCardScreenState extends State<MyCardScreen> {
             return Scaffold(
               drawer: BuildSideMenu(routeName: MyCardScreen.id),
               appBar: AppBar(
+                backgroundColor: sideMenuColor,
                 title: Text("My Business Card"),
               ),
               body: Column(

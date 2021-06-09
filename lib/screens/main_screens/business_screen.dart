@@ -28,6 +28,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
     return Scaffold(
       drawer: BuildSideMenu(routeName: BusinessScreen.id),
       appBar: AppBar(
+        backgroundColor: sideMenuColor,
         title: Text("Business"),
       ),
       body: GridView.count(
