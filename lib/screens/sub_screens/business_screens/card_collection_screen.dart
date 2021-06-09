@@ -9,8 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import 'package:meetwork/components/business_card_class.dart';
 import 'package:meetwork/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:meetwork/screens/main_screens/business_screen.dart';
 
 class CardCollectionScreen extends StatefulWidget {
   static const id = 'card_collection_screen';

@@ -59,7 +59,8 @@ List<Choice> choices = [
   Choice(
       mediaName: 'Facebook',
       icon: FontAwesomeIcons.facebook,
-      link: "https://www.facebook.com/search/people" + facebookAccount,
+      link:
+          "https://www.facebook.com/search/people" + (facebookAccount ?? "NAN"),
       accountName: facebookAccount ?? "NOT AVAILABLE"),
   Choice(
       mediaName: 'Instagram',

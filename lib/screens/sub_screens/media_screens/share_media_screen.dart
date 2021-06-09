@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:meetwork/constants.dart';
+import 'package:nearby_connections/nearby_connections.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
   @override
   void initState() {
     super.initState();
+
     readPref().then((value) {
       if (facebookAccount == null &&
           instagramAccount == null &&
@@ -107,7 +109,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                   Stack(
                     children: <Widget>[
                       Text(
-                        'Open NFC\nGet phones together',
+                        'Waiting for connection',
                         style: TextStyle(
                           fontSize: 36,
                           foreground: Paint()
@@ -117,7 +119,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                         ),
                       ),
                       Text(
-                        'Open NFC\nGet phones together',
+                        'Waiting for connection',
                         style: TextStyle(
                           fontSize: 36,
                           color: Colors.purple,
