@@ -1,6 +1,5 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:meetwork/components/database.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/business_card_screen.dart';
@@ -296,8 +295,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                     showSnackbar(status);
                                   },
                                   onDisconnected: (id) {
-                                    showSnackbar(
-                                        "Disconnected: ${endpointMap[id].endpointName}, id $id");
+                                    showSnackbar("Disconnected");
                                     setState(() {
                                       endpointMap.remove(id);
                                     });
@@ -356,9 +354,6 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                         return Center(
                                           child: Column(
                                             children: <Widget>[
-                                              Text("id: " + id),
-                                              Text("Name: " + name),
-                                              Text("ServiceId: " + serviceId),
                                               ElevatedButton(
                                                 style: ButtonStyle(
                                                     shape: MaterialStateProperty.all<
@@ -393,7 +388,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                                         endpointMap.remove(id);
                                                       });
                                                       showSnackbar(
-                                                          "Disconnected from: ${endpointMap[id].endpointName}, id $id");
+                                                          "Disconnected");
                                                     },
                                                   );
                                                 },
@@ -405,11 +400,10 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                     );
                                   },
                                   onEndpointLost: (id) {
-                                    showSnackbar(
-                                        "Lost discovered Endpoint: ${endpointMap[id].endpointName}, id $id");
+                                    showSnackbar("Lost discovered endpoint");
                                   },
                                 );
-                                showSnackbar("Visible: " + a.toString());
+                                showSnackbar("Visible");
                               } catch (e) {
                                 showSnackbar(e);
                               }
@@ -460,7 +454,6 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                         onPressed: () async {
                           endpointMap.forEach((key, value) {
                             String card = cardJSON;
-
                             showSnackbar("Sending card");
                             Nearby().sendBytesPayload(
                                 key, Uint8List.fromList(card.codeUnits));
@@ -515,10 +508,6 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
         return Center(
           child: Column(
             children: <Widget>[
-              Text("id: " + id),
-              Text("Token: " + info.authenticationToken),
-              Text("Name" + info.endpointName),
-              Text("Incoming: " + info.isIncomingConnection.toString()),
               ElevatedButton(
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -540,6 +529,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                         newCard = BusinessCardInfo.fromMap(json.decode(str));
                         newCard.cardID = counter;
                         _addCard(newCard);
+                        print(newCard);
                         _incrementCounter();
                         showSnackbar("Card added");
                         if (str.contains(':')) {
@@ -561,7 +551,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                           }
                         }
                       } else if (payload.type == PayloadType.FILE) {
-                        showSnackbar(endid + ": Sharing Card");
+                        showSnackbar("Sharing card");
                         tempFile = File(payload.filePath);
                       }
                     },
@@ -571,11 +561,11 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                         print(payloadTransferUpdate.bytesTransferred);
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.FAILURE) {
-                        print("failed");
-                        showSnackbar(endid + ": FAILED to share card");
+                        print("Failed");
+                        showSnackbar("FAILED to share card");
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.SUCCESS) {
-                        showSnackbar("$endid success");
+                        showSnackbar("Successfully shared card");
 
                         if (map.containsKey(payloadTransferUpdate.id)) {
                           //rename the file now

@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'package:meetwork/screens/sub_screens/media_screens/share_media_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:meetwork/components/media_info_class.dart';
 import 'package:meetwork/components/side_menu.dart';
 import 'package:meetwork/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,35 +19,97 @@ class AddSocialMediaScreen extends StatefulWidget {
 
 class _AddSocialMediaScreenState extends State<AddSocialMediaScreen> {
   @override
+  void initState() {
+    super.initState();
+    readPref().then((value) {
+      if (facebookAccount == "NOT AVAILABLE" &&
+          instagramAccount == "NOT AVAILABLE" &&
+          tumblrAccount == "NOT AVAILABLE" &&
+          twitterAccount == "NOT AVAILABLE" &&
+          tiktokAccount == "NOT AVAILABLE" &&
+          youtubeAccount == "NOT AVAILABLE" &&
+          redditAccount == "NOT AVAILABLE" &&
+          linkedinAccount == "NOT AVAILABLE" &&
+          twitchAccount == "NOT AVAILABLE") {
+        Navigator.pushNamed(context, ShareMediaScreen.id);
+      } else {
+        setState(() {});
+      }
+    });
+  }
+
+  Future<String> readPref() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String mediaMap = prefs.getString("newMedia");
+    if (mediaMap == null) {
+      Navigator.pushNamed(context, ShareMediaScreen.id);
+    } else {
+      var newMediaJSON = json.decode(mediaMap);
+      SocialMediaInfo newMedia = SocialMediaInfo.fromMap(newMediaJSON);
+      facebookAccount = newMedia.facebookAccount;
+      instagramAccount = newMedia.instagramAccount;
+      tumblrAccount = newMedia.tumblrAccount;
+      twitterAccount = newMedia.twitterAccount;
+      tiktokAccount = newMedia.tiktokAccount;
+      youtubeAccount = newMedia.youtubeAccount;
+      redditAccount = newMedia.redditAccount;
+      linkedinAccount = newMedia.linkedinAccount;
+      twitchAccount = newMedia.twitchAccount;
+    }
+    return "Accomplished";
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: sideMenuColor2,
-        drawer: BuildSideMenu(routeName: AddSocialMediaScreen.id),
-        appBar: AppBar(
-          backgroundColor: sideMenuColor,
-          title: Text("Add Friend"),
-        ),
-        body: ListView.builder(
-            primary: false,
-            padding: const EdgeInsets.all(2),
-            itemCount: choices.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                child: ChoiceCard(choice: choices[index]),
-              );
-            }));
+    return FutureBuilder(
+        future: readPref(),
+        builder: (context, snapshot) {
+          if (!(facebookAccount == null &&
+              instagramAccount == null &&
+              tumblrAccount == null &&
+              twitterAccount == null &&
+              tiktokAccount == null &&
+              youtubeAccount == null &&
+              redditAccount == null &&
+              linkedinAccount == null &&
+              twitchAccount == null)) {
+            return Scaffold(
+                backgroundColor: sideMenuColor2,
+                drawer: BuildSideMenu(routeName: AddSocialMediaScreen.id),
+                appBar: AppBar(
+                  backgroundColor: sideMenuColor,
+                  title: Text("Add Friend"),
+                ),
+                body: ListView.builder(
+                    primary: false,
+                    padding: const EdgeInsets.all(2),
+                    itemCount: choices.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        child: ChoiceCard(choice: choices[index]),
+                      );
+                    }));
+          } else {
+            return Scaffold(
+                body: Container(
+                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                    height: 230,
+                    width: double.maxFinite,
+                    child: Text("Loading...")));
+          }
+        });
   }
 }
 
-String facebookAccount = "Atacan Ugurlu";
-String instagramAccount = "Atacan Ugurlu";
+String facebookAccount;
+String instagramAccount;
 String tumblrAccount;
-String twitterAccount = "Atacan Ugurlu";
-String tiktokAccount = "Atacan Ugurlu";
-String youtubeAccount = "Atacan Ugurlu";
-String redditAccount = "Atacan Ugurlu";
-String linkedinAccount = "Atacan Ugurlu";
-String twitchAccount = "Atacan Ugurlu";
+String twitterAccount;
+String tiktokAccount;
+String youtubeAccount;
+String redditAccount;
+String linkedinAccount;
+String twitchAccount;
 
 class Choice {
   Choice({this.accountName, this.mediaName, this.link, this.icon});

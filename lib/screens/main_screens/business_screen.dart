@@ -7,6 +7,7 @@ import 'package:meetwork/screens/sub_screens/business_screens/business_card_scre
 import 'package:meetwork/screens/sub_screens/business_screens/card_collection_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/manually_add_card_screen.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/my_card_screen.dart';
+import 'package:meetwork/screens/sub_screens/business_screens/share_card_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meetwork/screens/main_screens/business_screen.dart';
@@ -66,7 +67,10 @@ const List<Choice> choices = const [
       title: 'Create Card',
       icon: FontAwesomeIcons.idCard,
       page: BusinessCardScreen.id),
-  const Choice(title: 'My Card', icon: Icons.share, page: MyCardScreen.id),
+  const Choice(
+      title: 'My Card',
+      icon: Icons.picture_in_picture_sharp,
+      page: MyCardScreen.id),
   const Choice(
       title: 'Card Collection',
       icon: Icons.collections_bookmark,
@@ -76,6 +80,10 @@ const List<Choice> choices = const [
       title: 'Manually Add Card',
       icon: FontAwesomeIcons.userTag,
       page: ManuallyAddCardScreen.id),
+  const Choice(
+      title: 'Share Card',
+      icon: FontAwesomeIcons.share,
+      page: ShareCardScreen.id),
 ];
 
 class ChoiceCard extends StatelessWidget {
@@ -108,6 +116,7 @@ class ChoiceCard extends StatelessWidget {
                           Icon(choice.icon, size: 70.0, color: Colors.white)),
                   Text(
                     choice.title,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,

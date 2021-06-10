@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:meetwork/constants.dart';
+import 'package:meetwork/screens/main_screens/business_screen.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -9,7 +10,6 @@ import 'package:meetwork/screens/sub_screens/media_screens/media_accounts_screen
 import '../../../components/media_info_class.dart';
 import 'dart:math';
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
 
 class ShareMediaScreen extends StatefulWidget {
   static const id = 'share_media_screen';
@@ -28,7 +28,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
   String redditAccount;
   String linkedinAccount;
   String twitchAccount;
-  var mediaJSON;
+  String mediaJSON;
 
   final String userName = Random().nextInt(10000).toString();
   final Strategy strategy = Strategy.P2P_STAR;
@@ -269,13 +269,6 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                         thickness: 1.2,
                         color: basePurple,
                       ),
-                      RichText(
-                          text: TextSpan(
-                              text: "User Name: " + userName,
-                              style: TextStyle(
-                                  color: basePurple,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18))),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -300,8 +293,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                                     showSnackbar(status);
                                   },
                                   onDisconnected: (id) {
-                                    showSnackbar(
-                                        "Disconnected: ${endpointMap[id].endpointName}, id $id");
+                                    showSnackbar("Disconnected");
                                     setState(() {
                                       endpointMap.remove(id);
                                     });
@@ -360,9 +352,6 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                                         return Center(
                                           child: Column(
                                             children: <Widget>[
-                                              Text("id: " + id),
-                                              Text("Name: " + name),
-                                              Text("ServiceId: " + serviceId),
                                               ElevatedButton(
                                                 style: ButtonStyle(
                                                     shape: MaterialStateProperty.all<
@@ -396,7 +385,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                                                         endpointMap.remove(id);
                                                       });
                                                       showSnackbar(
-                                                          "Disconnected from: ${endpointMap[id].endpointName}, id $id");
+                                                          "Disconnected");
                                                     },
                                                   );
                                                 },
@@ -408,11 +397,10 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                                     );
                                   },
                                   onEndpointLost: (id) {
-                                    showSnackbar(
-                                        "Lost discovered Endpoint: ${endpointMap[id].endpointName}, id $id");
+                                    showSnackbar("Lost discovered endpoint");
                                   },
                                 );
-                                showSnackbar("DISCOVERING: " + a.toString());
+                                showSnackbar("Visible");
                               } catch (e) {
                                 showSnackbar(e);
                               }
@@ -461,22 +449,12 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                         child: Text("Share Media Accounts",
                             style: TextStyle(color: Colors.white)),
                         onPressed: () async {
-                          PickedFile file = await ImagePicker()
-                              .getImage(source: ImageSource.gallery);
-
-                          if (file == null) return;
-
-                          for (MapEntry<String, ConnectionInfo> m
-                              in endpointMap.entries) {
-                            int payloadId = await Nearby()
-                                .sendFilePayload(m.key, file.path);
-                            showSnackbar("Sending file to ${m.key}");
+                          endpointMap.forEach((key, value) {
+                            String accounts = mediaJSON;
+                            showSnackbar("Sending accounts");
                             Nearby().sendBytesPayload(
-                                m.key,
-                                Uint8List.fromList(
-                                    "$payloadId:${file.path.split('/').last}"
-                                        .codeUnits));
-                          }
+                                key, Uint8List.fromList(accounts.codeUnits));
+                          });
                         },
                       ),
                       ElevatedButton(
@@ -527,10 +505,6 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
         return Center(
           child: Column(
             children: <Widget>[
-              Text("id: " + id),
-              Text("Token: " + info.authenticationToken),
-              Text("Name" + info.endpointName),
-              Text("Incoming: " + info.isIncomingConnection.toString()),
               ElevatedButton(
                 style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -547,8 +521,14 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                     id,
                     onPayLoadRecieved: (endid, payload) async {
                       if (payload.type == PayloadType.BYTES) {
+                        removePref("newMedia");
                         String str = String.fromCharCodes(payload.bytes);
-                        showSnackbar(endid + ": " + str);
+                        SocialMediaInfo newMediaObject;
+                        newMediaObject =
+                            SocialMediaInfo.fromMap(json.decode(str));
+                        var newMedia = json.encode(newMediaObject.toMap());
+                        savePref("newMedia", newMedia);
+                        showSnackbar("Accounts added");
 
                         if (str.contains(':')) {
                           // used for file payload as file payload is mapped as
@@ -561,7 +541,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                               tempFile.rename(
                                   tempFile.parent.path + "/" + fileName);
                             } else {
-                              showSnackbar("Card doesn't exist");
+                              showSnackbar("Accounts don't exist");
                             }
                           } else {
                             //add to map if not already
@@ -569,7 +549,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                           }
                         }
                       } else if (payload.type == PayloadType.FILE) {
-                        showSnackbar(endid + ": Sharing Card");
+                        showSnackbar("Sharing Accounts");
                         tempFile = File(payload.filePath);
                       }
                     },
@@ -579,12 +559,11 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                         print(payloadTransferUpdate.bytesTransferred);
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.FAILURE) {
-                        print("failed");
-                        showSnackbar(endid + ": FAILED to share card");
+                        print("Failed");
+                        showSnackbar("FAILED to share accounts");
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.SUCCESS) {
-                        showSnackbar(
-                            "$endid success, total bytes = ${payloadTransferUpdate.totalBytes}");
+                        showSnackbar("Successfully shared accounts");
 
                         if (map.containsKey(payloadTransferUpdate.id)) {
                           //rename the file now
