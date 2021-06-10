@@ -364,6 +364,17 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                                               Text("Name: " + name),
                                               Text("ServiceId: " + serviceId),
                                               ElevatedButton(
+                                                style: ButtonStyle(
+                                                    shape: MaterialStateProperty.all<
+                                                            RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6.0))),
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(basePurple)),
                                                 child:
                                                     Text("Request Connection"),
                                                 onPressed: () {
@@ -521,6 +532,11 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
               Text("Name" + info.endpointName),
               Text("Incoming: " + info.isIncomingConnection.toString()),
               ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0))),
+                    backgroundColor: MaterialStateProperty.all(basePurple)),
                 child: Text("Accept Connection"),
                 onPressed: () {
                   Navigator.pop(context);
@@ -584,6 +600,11 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                 },
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0))),
+                    backgroundColor: MaterialStateProperty.all(basePurple)),
                 child: Text("Reject Connection"),
                 onPressed: () async {
                   Navigator.pop(context);

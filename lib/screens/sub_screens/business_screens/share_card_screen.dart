@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:meetwork/components/database.dart';
 import 'package:meetwork/constants.dart';
 import 'package:meetwork/screens/sub_screens/business_screens/business_card_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,7 +29,13 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
   String email;
   String website;
   String linkedin;
-  var cardJSON;
+  String cardJSON;
+
+  DatabaseHelper _databaseHelper = DatabaseHelper();
+
+  void _addCard(BusinessCardInfo card) async {
+    await _databaseHelper.insert(card);
+  }
 
   final String userName = Random().nextInt(10000).toString();
   final Strategy strategy = Strategy.P2P_STAR;
@@ -260,7 +267,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                       ),
                       RichText(
                           text: TextSpan(
-                              text: "User Name: " + userName,
+                              text: "User Name: " + name,
                               style: TextStyle(
                                   color: sideMenuColor2,
                                   fontWeight: FontWeight.bold,
@@ -353,6 +360,18 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                               Text("Name: " + name),
                                               Text("ServiceId: " + serviceId),
                                               ElevatedButton(
+                                                style: ButtonStyle(
+                                                    shape: MaterialStateProperty.all<
+                                                            RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6.0))),
+                                                    backgroundColor:
+                                                        MaterialStateProperty
+                                                            .all(
+                                                                sideMenuColor2)),
                                                 child:
                                                     Text("Request Connection"),
                                                 onPressed: () {
@@ -390,7 +409,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                         "Lost discovered Endpoint: ${endpointMap[id].endpointName}, id $id");
                                   },
                                 );
-                                showSnackbar("DISCOVERING: " + a.toString());
+                                showSnackbar("Visible: " + a.toString());
                               } catch (e) {
                                 showSnackbar(e);
                               }
@@ -439,22 +458,13 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                         child: Text("Share Card",
                             style: TextStyle(color: Colors.orange)),
                         onPressed: () async {
-                          PickedFile file = await ImagePicker()
-                              .getImage(source: ImageSource.gallery);
+                          endpointMap.forEach((key, value) {
+                            String card = cardJSON;
 
-                          if (file == null) return;
-
-                          for (MapEntry<String, ConnectionInfo> m
-                              in endpointMap.entries) {
-                            int payloadId = await Nearby()
-                                .sendFilePayload(m.key, file.path);
-                            showSnackbar("Sending file to ${m.key}");
+                            showSnackbar("Sending card");
                             Nearby().sendBytesPayload(
-                                m.key,
-                                Uint8List.fromList(
-                                    "$payloadId:${file.path.split('/').last}"
-                                        .codeUnits));
-                          }
+                                key, Uint8List.fromList(card.codeUnits));
+                          });
                         },
                       ),
                       ElevatedButton(
@@ -510,6 +520,11 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
               Text("Name" + info.endpointName),
               Text("Incoming: " + info.isIncomingConnection.toString()),
               ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0))),
+                    backgroundColor: MaterialStateProperty.all(sideMenuColor2)),
                 child: Text("Accept Connection"),
                 onPressed: () {
                   Navigator.pop(context);
@@ -521,8 +536,12 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                     onPayLoadRecieved: (endid, payload) async {
                       if (payload.type == PayloadType.BYTES) {
                         String str = String.fromCharCodes(payload.bytes);
-                        showSnackbar(endid + ": " + str);
-
+                        BusinessCardInfo newCard;
+                        newCard = BusinessCardInfo.fromMap(json.decode(str));
+                        newCard.cardID = counter;
+                        _addCard(newCard);
+                        _incrementCounter();
+                        showSnackbar("Card added");
                         if (str.contains(':')) {
                           // used for file payload as file payload is mapped as
                           // payloadId:filename
@@ -556,8 +575,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                         showSnackbar(endid + ": FAILED to share card");
                       } else if (payloadTransferUpdate.status ==
                           PayloadStatus.SUCCESS) {
-                        showSnackbar(
-                            "$endid success, total bytes = ${payloadTransferUpdate.totalBytes}");
+                        showSnackbar("$endid success");
 
                         if (map.containsKey(payloadTransferUpdate.id)) {
                           //rename the file now
@@ -573,6 +591,11 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                 },
               ),
               ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0))),
+                    backgroundColor: MaterialStateProperty.all(sideMenuColor2)),
                 child: Text("Reject Connection"),
                 onPressed: () async {
                   Navigator.pop(context);
