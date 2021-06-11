@@ -1,5 +1,8 @@
 # MeetWork
 
+Contact Information Sharing Application for Social Media and Business
+Android
+
 Atacan Uğurlu Graduation Project.
 
 Hacettepe University Computer Engineering Department
