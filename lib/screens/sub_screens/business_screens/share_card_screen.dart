@@ -529,7 +529,6 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                         newCard = BusinessCardInfo.fromMap(json.decode(str));
                         newCard.cardID = counter;
                         _addCard(newCard);
-                        print(newCard);
                         _incrementCounter();
                         showSnackbar("Card added");
                         if (str.contains(':')) {
