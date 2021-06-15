@@ -397,7 +397,7 @@ class _ShareMediaScreenState extends State<ShareMediaScreen> {
                                     );
                                   },
                                   onEndpointLost: (id) {
-                                    showSnackbar("Lost discovered endpoint");
+                                    showSnackbar("Connection lost");
                                   },
                                 );
                                 showSnackbar("Visible");

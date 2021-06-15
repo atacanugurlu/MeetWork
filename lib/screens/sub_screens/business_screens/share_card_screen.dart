@@ -400,7 +400,7 @@ class _ShareCardScreenState extends State<ShareCardScreen> {
                                     );
                                   },
                                   onEndpointLost: (id) {
-                                    showSnackbar("Lost discovered endpoint");
+                                    showSnackbar("Connection lost");
                                   },
                                 );
                                 showSnackbar("Visible");
